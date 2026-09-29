@@ -14,7 +14,5 @@ public class HomeController {
         return "UserView/user";
     }
     @GetMapping("/admin")
-    public String adminPage() {
-        return "UserView/admin";
-    }
+    public String adminPage() { return "UserView/admin"; }
 }
