@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/springsecurity"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        lang="en"
+>
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+    </head>
+    <body>
+        <div th:replace="~{Shared/menu :: menu}"></div>
+        <main layout:fragment="content"></main>
+    </body>
+</html>
