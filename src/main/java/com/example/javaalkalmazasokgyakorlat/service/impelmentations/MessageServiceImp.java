@@ -6,6 +6,8 @@ import com.example.javaalkalmazasokgyakorlat.model.message.MessageResponseDto;
 import com.example.javaalkalmazasokgyakorlat.repository.MessageRepository;
 import com.example.javaalkalmazasokgyakorlat.service.MessageService;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -48,6 +50,21 @@ public class MessageServiceImp implements MessageService {
         }
         messageRepository.deleteById(id);
     }
+    @Override
+    public List<MessageResponseDto> findAll(int page, int size) {
+        return messageRepository.findAll(
+                        PageRequest.of(
+                                page,
+                                size,
+                                Sort.by("createdAt").descending()
+                        )
+                )
+                .getContent()
+                .stream()
+                .map(this::toDto)
+                .toList();
+    }
+
     private MessageResponseDto toDto(Message message) {
         MessageResponseDto dto = new MessageResponseDto();
         dto.setId(message.getId());
