@@ -1,5 +1,10 @@
 package com.example.javaalkalmazasokgyakorlat.model;
+import com.example.javaalkalmazasokgyakorlat.model.message.Message;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -13,8 +18,10 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-    public User() {
-    }
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Message> messages = new HashSet<>();
+
+    public User() {}
 
     public User(String username, String password, String role) {
         this.username = username;
@@ -48,5 +55,9 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
     }
 }
