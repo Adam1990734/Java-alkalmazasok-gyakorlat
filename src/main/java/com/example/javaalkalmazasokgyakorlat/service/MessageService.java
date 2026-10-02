@@ -8,8 +8,10 @@ import java.util.List;
 @Service
 public interface MessageService {
     List<MessageResponseDto> findAll();
+    List<MessageResponseDto> findAllDescByDatetime(int page, int size);
     MessageResponseDto findById(Long id);
     MessageResponseDto create(MessageDto dto);
     void delete(Long id);
-    List<MessageResponseDto> findAllDescByDatetime(int page, int size);
+
+    Long countAll();
 }

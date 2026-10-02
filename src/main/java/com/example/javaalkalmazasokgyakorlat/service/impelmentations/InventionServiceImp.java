@@ -5,6 +5,8 @@ import com.example.javaalkalmazasokgyakorlat.model.invention.InventionDto;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionResponseDto;
 import com.example.javaalkalmazasokgyakorlat.repository.InventionRepository;
 import com.example.javaalkalmazasokgyakorlat.service.InventionService;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,6 +49,22 @@ public class InventionServiceImp implements InventionService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public List<InventionResponseDto> findAll(int page, int size) {
+        return repository.findAll(
+                        PageRequest.of(
+                                page,
+                                size
+                        )
+                )
+                .stream()
+                .map(this::toDto)
+                .toList();
+    }
+
+    @Override
+    public Long countAll() { return repository.count(); }
 
     private InventionResponseDto toDto(Invention invention) {
         InventionResponseDto dto = new InventionResponseDto();

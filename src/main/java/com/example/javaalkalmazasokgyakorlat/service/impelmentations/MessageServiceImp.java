@@ -15,22 +15,22 @@ import java.util.List;
 
 @Service
 public class MessageServiceImp implements MessageService {
-    private final MessageRepository messageRepository;
+    private final MessageRepository repository;
 
     public MessageServiceImp(MessageRepository messageRepository) {
-        this.messageRepository = messageRepository;
+        this.repository = messageRepository;
     }
 
     @Override
     public List<MessageResponseDto> findAll() {
-        return messageRepository.findAll()
+        return repository.findAll()
                 .stream()
                 .map(this::toDto)
                 .toList();
     }
     @Override
     public MessageResponseDto findById(Long id) {
-        Message message = messageRepository.findById(id)
+        Message message = repository.findById(id)
                 .orElseThrow(() ->
                         new EntityNotFoundException("Message not found with id: " + id));
         return toDto(message);
@@ -40,19 +40,19 @@ public class MessageServiceImp implements MessageService {
         Message message = new Message();
         message.setContent(dto.getContent());
         message.setCreatedAt(LocalDateTime.now());
-        Message savedMessage = messageRepository.save(message);
+        Message savedMessage = repository.save(message);
         return toDto(savedMessage);
     }
     @Override
     public void delete(Long id) {
-        if (!messageRepository.existsById(id)) {
+        if (!repository.existsById(id)) {
             throw new EntityNotFoundException("Message not found with id: " + id);
         }
-        messageRepository.deleteById(id);
+        repository.deleteById(id);
     }
     @Override
     public List<MessageResponseDto> findAllDescByDatetime(int page, int size) {
-        return messageRepository.findAll(
+        return repository.findAll(
                         PageRequest.of(
                                 page,
                                 size,
@@ -64,6 +64,9 @@ public class MessageServiceImp implements MessageService {
                 .map(this::toDto)
                 .toList();
     }
+
+    @Override
+    public Long countAll() { return repository.count(); }
 
     private MessageResponseDto toDto(Message message) {
         MessageResponseDto dto = new MessageResponseDto();

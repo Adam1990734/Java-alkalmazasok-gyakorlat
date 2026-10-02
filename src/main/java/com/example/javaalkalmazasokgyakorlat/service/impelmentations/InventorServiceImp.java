@@ -6,6 +6,7 @@ import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorDto;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorResponseDto;
 import com.example.javaalkalmazasokgyakorlat.repository.InventorRepository;
 import com.example.javaalkalmazasokgyakorlat.service.InventorService;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -64,6 +65,22 @@ public class InventorServiceImp implements InventorService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public List<InventorResponseDto> findAll(int page, int size) {
+        return repository.findAll(
+                        PageRequest.of(
+                                page,
+                                size
+                        )
+                )
+                .stream()
+                .map(this::toDto)
+                .toList();
+    }
+
+    @Override
+    public Long countAll() { return repository.count(); }
 
     private InventorResponseDto toDto(Inventor inventor) {
         InventorResponseDto dto = new InventorResponseDto();

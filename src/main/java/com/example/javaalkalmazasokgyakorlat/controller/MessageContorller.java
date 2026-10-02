@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/message")
 public class MessageContorller {
     private final MessageService messageService;
-    private final MessageRepository messageRepository;
 
-    public MessageContorller(MessageService messageService, MessageRepository messageRepository) {
+    public MessageContorller(MessageService messageService) {
         this.messageService = messageService;
-        this.messageRepository = messageRepository;
     }
 
     @GetMapping
@@ -28,7 +26,7 @@ public class MessageContorller {
         model.addAttribute("messages", messageService.findAllDescByDatetime(page, len));
         model.addAttribute("len", len);
         model.addAttribute("lastpage", page);
-        model.addAttribute("allcount", messageRepository.count());
+        model.addAttribute("allcount", messageService.countAll());
         return "MessageView/index";
     }
 }

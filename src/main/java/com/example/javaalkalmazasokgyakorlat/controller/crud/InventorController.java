@@ -2,7 +2,9 @@ package com.example.javaalkalmazasokgyakorlat.controller.crud;
 
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorDto;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorResponseDto;
+import com.example.javaalkalmazasokgyakorlat.repository.InventorRepository;
 import com.example.javaalkalmazasokgyakorlat.service.InventorService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,14 +15,23 @@ import java.util.List;
 @RequestMapping("/inventor")
 public class InventorController {
     private final InventorService inventorService;
-    public InventorController(InventorService inventorService) {
+    private final InventorRepository inventorRepository;
+    public InventorController(InventorService inventorService, InventorRepository inventorRepository) {
         this.inventorService = inventorService;
+        this.inventorRepository = inventorRepository;
     }
 
     @GetMapping
-    public String index(Model model) {
-        List<InventorResponseDto> inventors = inventorService.findAll();
+    public String index(
+            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(name = "len", defaultValue = "20", required = false) int len,
+            Model model
+    ) {
+        List<InventorResponseDto> inventors = inventorService.findAll(page, len);
         model.addAttribute("inventor", inventors);
+        model.addAttribute("len", len);
+        model.addAttribute("lastpage", page);
+        model.addAttribute("allcount", inventorService.countAll());
         return "InventorView/index";
     }
     @GetMapping("/details/{id}")
@@ -35,7 +46,7 @@ public class InventorController {
         return "InventorView/create";
     }
     @PostMapping("/create")
-    public String create(@ModelAttribute InventorDto dto) {
+    public String create(@Valid @ModelAttribute InventorDto dto) {
         InventorResponseDto created = inventorService.create(dto);
         return "redirect:/inventor";
     }
@@ -46,7 +57,7 @@ public class InventorController {
         return "InventorView/update";
     }
     @PutMapping("/update/{id}")
-    public String update(@PathVariable Long id, @ModelAttribute InventorDto dto) {
+    public String update(@PathVariable Long id, @Valid @ModelAttribute InventorDto dto) {
         InventorResponseDto updated = inventorService.update(id, dto);
         return "redirect:/inventor";
     }
