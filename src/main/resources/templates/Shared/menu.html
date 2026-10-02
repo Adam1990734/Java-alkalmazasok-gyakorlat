@@ -15,13 +15,25 @@
             | <a th:href="@{/register}">Register</a>
             | <a th:href="@{/login}">Login</a>
         </span>
+        <span>
+            <a th:href="@{/contact}">Contact</a>
+        </span>
+        <span sec:authorize="isAuthenticated()">
+            <!-- Ez még nincs kész -->
+            <a th:href="@{/}">Messages</a>
+        </span>
+        <span>
+            <!-- Ez még nincs kész -->
+            <a th:href="@{/}">Diagram</a>
+        </span>
+        <span sec:authorize="hasRole('ADMIN')">
+            <!-- Ez az adminnak van (nincs még kész) -->
+            <a th:href="@{/crud}">CRUD</a>
+        </span>
         <span sec:authorize="isAuthenticated()">
             <form th:action="@{/logout}" method="post" style="display: inline">
                 <button type="submit">Logout</button>
             </form>
-        </span>
-        <span>
-            <a th:href="@{/}"></a>
         </span>
     </nav>
 </body>

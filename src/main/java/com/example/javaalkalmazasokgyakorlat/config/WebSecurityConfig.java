@@ -45,7 +45,10 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests(aut ->
-                        aut.requestMatchers("/", "/register", "/login", "/css/**", "/js/**").permitAll()
+                        aut.requestMatchers("/", "/register", "/login",
+                                            "/css/**", "/js/**",
+                                            "/contact", "/show/**"
+                                ).permitAll()
                                 .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
                                 .requestMatchers("/admin").hasRole("ADMIN")
                                 .anyRequest()

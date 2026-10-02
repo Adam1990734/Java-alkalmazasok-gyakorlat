@@ -1,6 +1,7 @@
 package com.example.javaalkalmazasokgyakorlat.model.message;
 
 import com.example.javaalkalmazasokgyakorlat.model.user.User;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ public class Message {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
+    @Nullable
     private User user;
 
     public Message() {}
