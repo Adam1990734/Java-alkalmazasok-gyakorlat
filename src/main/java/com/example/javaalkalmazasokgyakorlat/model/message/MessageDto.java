@@ -8,7 +8,7 @@ public class MessageDto {
     @NotBlank
     @Size(max = 500)
     private String content;
-    @NotNull
+
     private Long userId;
 
     public MessageDto() {}

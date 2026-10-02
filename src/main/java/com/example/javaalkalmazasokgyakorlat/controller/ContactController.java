@@ -36,7 +36,7 @@ public class ContactController {
         msg.setContent(message.getContent());
         msg.setCreatedAt(LocalDateTime.now());
 
-        Optional<User> connectedUser = userRepository.findById(user.getId());
+        Optional<User> connectedUser = user != null ? userRepository.findById(user.getId()) : Optional.empty();
         connectedUser.ifPresentOrElse(u -> {//Ha ismert akkor megy a userhez:
             u.addMessage(msg);
             userRepository.save(u);
