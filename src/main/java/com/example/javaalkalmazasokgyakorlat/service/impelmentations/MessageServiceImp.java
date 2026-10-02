@@ -51,7 +51,7 @@ public class MessageServiceImp implements MessageService {
         messageRepository.deleteById(id);
     }
     @Override
-    public List<MessageResponseDto> findAll(int page, int size) {
+    public List<MessageResponseDto> findAllDescByDatetime(int page, int size) {
         return messageRepository.findAll(
                         PageRequest.of(
                                 page,
@@ -70,6 +70,11 @@ public class MessageServiceImp implements MessageService {
         dto.setId(message.getId());
         dto.setContent(message.getContent());
         dto.setCreatedAt(message.getCreatedAt());
+        dto.setUsername(
+                message.getUser() == null ? "Anonymouse" : message.getUser().getUsername()
+        );
+        if(message.getUser() != null)
+            dto.setUserId(message.getUser().getId());
         return dto;
     }
 }

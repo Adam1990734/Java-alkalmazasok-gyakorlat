@@ -11,5 +11,5 @@ public interface MessageService {
     MessageResponseDto findById(Long id);
     MessageResponseDto create(MessageDto dto);
     void delete(Long id);
-    List<MessageResponseDto> findAll(int page, int size);
+    List<MessageResponseDto> findAllDescByDatetime(int page, int size);
 }

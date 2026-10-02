@@ -6,6 +6,7 @@ import com.example.javaalkalmazasokgyakorlat.model.user.UserMoreDetails;
 import com.example.javaalkalmazasokgyakorlat.repository.MessageRepository;
 import com.example.javaalkalmazasokgyakorlat.repository.UserRepository;
 import com.example.javaalkalmazasokgyakorlat.service.MessageService;
+import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,10 +29,10 @@ public class ContactController {
     @GetMapping
     public String index(Model model) {
         model.addAttribute("message", new MessageDto());
-        return "MessageView/index";
+        return "MessageView/create";
     }
     @PostMapping
-    public String saveMessage(@ModelAttribute MessageDto message, @AuthenticationPrincipal UserMoreDetails user, Model model) {
+    public String saveMessage(@Valid @ModelAttribute MessageDto message, @AuthenticationPrincipal UserMoreDetails user, Model model) {
         Message msg = new Message();
         msg.setContent(message.getContent());
         msg.setCreatedAt(LocalDateTime.now());
@@ -42,6 +43,6 @@ public class ContactController {
             userRepository.save(u);
             //Ha nincs akkor NULL hatékonyabb!
         }, () -> messageRepository.save(msg));
-        return "redirect:/";
+        return "redirect:/contact";
     }
 }

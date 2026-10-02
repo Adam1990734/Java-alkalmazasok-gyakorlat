@@ -5,12 +5,21 @@
       lang="en"
 >
 <body><div layout:fragment="content">
-    <form method="post" th:action="@{/contact}" th:object="${message}">
-        <div>
-            <label>Adja meg az üzenetet:</label>
-            <textarea th:field="*{content}"></textarea>
-            <button type="submit">Send</button>
-        </div>
-    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Sent by</th>
+                <th>At</th>
+                <th>Content</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="message : ${messages}" th:object="${message}">
+                <td th:text="*{username}"></td>
+                <td th:text="*{createdAt}"></td>
+                <td th:text="*{content}"></td>
+            </tr>
+        </tbody>
+    </table>
 </div></body>
 </html>
