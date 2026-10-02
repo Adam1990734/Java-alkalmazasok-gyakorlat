@@ -16,13 +16,9 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/contact")
 public class ContactController {
-    private final MessageService messageService;
     private final UserRepository userRepository;
 
-    public ContactController(MessageService messageService, UserRepository userRepository) {
-        this.messageService = messageService;
-        this.userRepository = userRepository;
-    }
+    public ContactController(UserRepository userRepository) { this.userRepository = userRepository; }
 
     @GetMapping
     public String index(Model model) {
@@ -40,6 +36,7 @@ public class ContactController {
             u.addMessage(msg);
             userRepository.save(u);
         }, () -> {//Ha nem ismert megy statikus taghoz (ha nincs benne seed-eld újra vagy nézd meg a fájlt):
+            //Még a user seeder nincs kész most vettem észre javítani fogom!
             Optional<User> anon = userRepository.findByUsername("ANONYMOUS");
             anon.ifPresent(a -> {
                 a.addMessage(msg);
