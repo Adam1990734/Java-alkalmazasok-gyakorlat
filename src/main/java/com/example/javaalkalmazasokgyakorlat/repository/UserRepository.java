@@ -1,5 +1,5 @@
 package com.example.javaalkalmazasokgyakorlat.repository;
-import com.example.javaalkalmazasokgyakorlat.model.User;
+import com.example.javaalkalmazasokgyakorlat.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 

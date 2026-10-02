@@ -1,0 +1,16 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{Shared/mainlayout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en"
+>
+<body><div layout:fragment="content">
+    <form method="post" th:object="${message}">
+        <div>
+            <label>Adja meg az üzenetet:</label>
+            <textarea th:field="*{content}"></textarea>
+            <button type="submit">Send</button>
+        </div>
+    </form>
+</div></body>
+</html>

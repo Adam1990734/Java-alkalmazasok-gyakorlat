@@ -1,4 +1,4 @@
-package com.example.javaalkalmazasokgyakorlat.model;
+package com.example.javaalkalmazasokgyakorlat.model.user;
 import com.example.javaalkalmazasokgyakorlat.model.message.Message;
 import jakarta.persistence.*;
 
@@ -15,15 +15,17 @@ public class User {
     private String username;
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
-    private String role;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
+    private UserRole role;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Message> messages = new HashSet<>();
 
     public User() {}
 
-    public User(String username, String password, String role) {
+    public User(String username, String password, UserRole role) {
         this.username = username;
         this.password = password;
         this.role = role;
@@ -49,11 +51,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 

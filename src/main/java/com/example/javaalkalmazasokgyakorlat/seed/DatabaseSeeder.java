@@ -2,8 +2,10 @@ package com.example.javaalkalmazasokgyakorlat.seed;
 
 import com.example.javaalkalmazasokgyakorlat.model.invention.Invention;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.Inventor;
+import com.example.javaalkalmazasokgyakorlat.model.user.UserRole;
 import com.example.javaalkalmazasokgyakorlat.repository.InventionRepository;
 import com.example.javaalkalmazasokgyakorlat.repository.InventorRepository;
+import com.example.javaalkalmazasokgyakorlat.repository.UserRoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.ClassPathResource;
@@ -21,12 +23,15 @@ import java.util.Map;
 public class DatabaseSeeder implements CommandLineRunner {
     private final InventorRepository inventorRepository;
     private final InventionRepository inventionRepository;
+    private final UserRoleRepository userRoleRepository;
 
     private final Map<Long, Inventor> inventors = new HashMap<>();
     private final Map<Long, Invention> inventions = new HashMap<>();
 
     @Override
     public void run(String... args) throws Exception {
+        if(userRoleRepository.count() == 0)
+            loadRoles();
         if (inventorRepository.count() > 0 && inventionRepository.count() > 0)
             return;
         loadInventions();
@@ -125,6 +130,35 @@ public class DatabaseSeeder implements CommandLineRunner {
 
                 if (inventor != null && invention != null)
                     inventor.getInventions().add(invention);
+            }
+        }
+    }
+    private void loadRoles() throws IOException {
+
+        ClassPathResource resource =
+                new ClassPathResource("seed/roles.txt");
+
+        try (BufferedReader reader =
+                     new BufferedReader(
+                             new InputStreamReader(
+                                     resource.getInputStream(),
+                                     StandardCharsets.UTF_8))) {
+
+            reader.readLine();
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+
+                String[] parts = line.split("\t");
+
+                Integer id = Integer.parseInt(parts[0]);
+
+                UserRole role = new UserRole();
+                role.setId(id);
+                role.setName(parts[1]);
+
+                userRoleRepository.save(role);
             }
         }
     }

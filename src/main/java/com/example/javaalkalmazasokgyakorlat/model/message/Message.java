@@ -1,9 +1,8 @@
 package com.example.javaalkalmazasokgyakorlat.model.message;
 
-import com.example.javaalkalmazasokgyakorlat.model.User;
+import com.example.javaalkalmazasokgyakorlat.model.user.User;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity

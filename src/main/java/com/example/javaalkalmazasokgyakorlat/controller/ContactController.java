@@ -1,31 +1,39 @@
 package com.example.javaalkalmazasokgyakorlat.controller;
 
-import com.example.javaalkalmazasokgyakorlat.model.message.Message;
+import com.example.javaalkalmazasokgyakorlat.model.message.*;
+import com.example.javaalkalmazasokgyakorlat.model.user.UserMoreDetails;
+import com.example.javaalkalmazasokgyakorlat.repository.UserRepository;
 import com.example.javaalkalmazasokgyakorlat.service.MessageService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/contact")
 public class ContactController {
     private final MessageService messageService;
+    private final UserRepository userRepository;
 
-    public ContactController(MessageService messageService) { this.messageService = messageService; }
+    public ContactController(MessageService messageService, UserRepository userRepository) {
+        this.messageService = messageService;
+        this.userRepository = userRepository;
+    }
 
     @GetMapping
     public String index(Model model) {
-        //Ide valami egyszerű téma kéne és abba kéne beágyazni a form-ot (külön html-be gondoltam tenni hogy átlátható legyen)
-        model.addAttribute("message", new Message());
-        //Úgy gondoltam hogy majd az üzenete user alpján bekötjük
-        return "/";
+        model.addAttribute("message", new MessageDto());
+        return "MessageView/index";
     }
     @PostMapping
-    public String saveMessage(Model model) {
-        //Visszajelzést gondoltam a usernek és után ott legyen egy visszaugrás a főoldalra
-        model.addAttribute("resultOfSave", true);
-        return "/";
+    @ResponseBody
+    public Message saveMessage(@RequestParam MessageDto message, @AuthenticationPrincipal UserMoreDetails user, Model model) {
+        var msg = new Message();
+        msg.setContent(message.getContent());
+        msg.setCreatedAt(LocalDateTime.now());
+        user.getUser().getMessages().add(msg);
+        return msg;
     }
 }

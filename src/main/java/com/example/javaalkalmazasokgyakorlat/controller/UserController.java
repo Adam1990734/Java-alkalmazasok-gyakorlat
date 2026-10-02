@@ -1,7 +1,9 @@
 package com.example.javaalkalmazasokgyakorlat.controller;
 
-import com.example.javaalkalmazasokgyakorlat.model.User;
+import com.example.javaalkalmazasokgyakorlat.model.user.User;
+import com.example.javaalkalmazasokgyakorlat.model.user.UserRole;
 import com.example.javaalkalmazasokgyakorlat.repository.UserRepository;
+import com.example.javaalkalmazasokgyakorlat.repository.UserRoleRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class UserController {
     private final UserRepository userRepository;
+    private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
-    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserController(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.userRoleRepository = userRoleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -27,8 +31,7 @@ public class UserController {
         return "UserView/register";
     }
     @PostMapping("/register")
-    public String register(@RequestParam String username, @RequestParam String password, Model
-            model) {
+    public String register(@RequestParam String username, @RequestParam String password, Model model) {
         if (userRepository.findByUsername(username).isPresent()) {
             model.addAttribute("error","This username is already taken!");
             return "UserView/register";
@@ -36,7 +39,7 @@ public class UserController {
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
-        user.setRole("USER");
+        user.setRole(userRoleRepository.findFirstByName("USER"));
         userRepository.save(user);
         return "redirect:/login?registered";
     }

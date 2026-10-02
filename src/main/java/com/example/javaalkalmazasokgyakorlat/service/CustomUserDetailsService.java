@@ -1,5 +1,6 @@
 package com.example.javaalkalmazasokgyakorlat.service;
-import com.example.javaalkalmazasokgyakorlat.model.User;
+import com.example.javaalkalmazasokgyakorlat.model.user.User;
+import com.example.javaalkalmazasokgyakorlat.model.user.UserMoreDetails;
 import com.example.javaalkalmazasokgyakorlat.repository.UserRepository;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
@@ -10,13 +11,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.userRepository = userRepository;
     }
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserMoreDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)
             .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
-        return org.springframework.security.core.userdetails.User
-            .withUsername(user.getUsername())
-            .password(user.getPassword())
-            .roles(user.getRole())
-            .build();
+        return new UserMoreDetails(user);
     }
 }
