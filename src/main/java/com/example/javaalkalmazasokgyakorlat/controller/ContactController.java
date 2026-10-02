@@ -1,6 +1,7 @@
 package com.example.javaalkalmazasokgyakorlat.controller;
 
 import com.example.javaalkalmazasokgyakorlat.model.message.*;
+import com.example.javaalkalmazasokgyakorlat.model.user.User;
 import com.example.javaalkalmazasokgyakorlat.model.user.UserMoreDetails;
 import com.example.javaalkalmazasokgyakorlat.repository.UserRepository;
 import com.example.javaalkalmazasokgyakorlat.service.MessageService;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/contact")
@@ -28,12 +30,22 @@ public class ContactController {
         return "MessageView/index";
     }
     @PostMapping
-    @ResponseBody
-    public Message saveMessage(@RequestParam MessageDto message, @AuthenticationPrincipal UserMoreDetails user, Model model) {
+    public String saveMessage(@ModelAttribute MessageDto message, @AuthenticationPrincipal UserMoreDetails user, Model model) {
         var msg = new Message();
         msg.setContent(message.getContent());
         msg.setCreatedAt(LocalDateTime.now());
-        user.getUser().getMessages().add(msg);
-        return msg;
+
+        Optional<User> connectedUser = userRepository.findById(user.getId());
+        connectedUser.ifPresentOrElse(u -> {//Ha ismert akkor megy a userhez:
+            u.addMessage(msg);
+            userRepository.save(u);
+        }, () -> {//Ha nem ismert megy statikus taghoz (ha nincs benne seed-eld újra vagy nézd meg a fájlt):
+            Optional<User> anon = userRepository.findByUsername("ANONYMOUS");
+            anon.ifPresent(a -> {
+                a.addMessage(msg);
+                userRepository.save(a);
+            });
+        });
+        return "redirect:/";
     }
 }

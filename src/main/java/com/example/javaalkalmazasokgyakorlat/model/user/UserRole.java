@@ -16,6 +16,11 @@ public class UserRole {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<User> users = new HashSet<>();
 
+    public void addUser(User user) {
+        this.users.add(user);
+        user.setRole(this);
+    }
+
     public Integer getId() {
         return id;
     }

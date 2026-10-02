@@ -5,7 +5,7 @@
       lang="en"
 >
 <body><div layout:fragment="content">
-    <form method="post" th:object="${message}">
+    <form method="post" th:action="@{/contact}" th:object="${message}">
         <div>
             <label>Adja meg az üzenetet:</label>
             <textarea th:field="*{content}"></textarea>

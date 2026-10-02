@@ -23,6 +23,11 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Message> messages = new HashSet<>();
 
+    public void addMessage(Message message) {
+        this.messages.add(message);
+        message.setUser(this);
+    }
+
     public User() {}
 
     public User(String username, String password, UserRole role) {
