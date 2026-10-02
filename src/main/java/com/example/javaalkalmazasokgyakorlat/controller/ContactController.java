@@ -3,6 +3,7 @@ package com.example.javaalkalmazasokgyakorlat.controller;
 import com.example.javaalkalmazasokgyakorlat.model.message.*;
 import com.example.javaalkalmazasokgyakorlat.model.user.User;
 import com.example.javaalkalmazasokgyakorlat.model.user.UserMoreDetails;
+import com.example.javaalkalmazasokgyakorlat.repository.MessageRepository;
 import com.example.javaalkalmazasokgyakorlat.repository.UserRepository;
 import com.example.javaalkalmazasokgyakorlat.service.MessageService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,9 +17,13 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/contact")
 public class ContactController {
+    private final MessageRepository messageRepository;
     private final UserRepository userRepository;
 
-    public ContactController(UserRepository userRepository) { this.userRepository = userRepository; }
+    public ContactController(UserRepository userRepository, MessageRepository messageRepository) {
+        this.userRepository = userRepository;
+        this.messageRepository = messageRepository;
+    }
 
     @GetMapping
     public String index(Model model) {
@@ -27,7 +32,7 @@ public class ContactController {
     }
     @PostMapping
     public String saveMessage(@ModelAttribute MessageDto message, @AuthenticationPrincipal UserMoreDetails user, Model model) {
-        var msg = new Message();
+        Message msg = new Message();
         msg.setContent(message.getContent());
         msg.setCreatedAt(LocalDateTime.now());
 
@@ -35,14 +40,8 @@ public class ContactController {
         connectedUser.ifPresentOrElse(u -> {//Ha ismert akkor megy a userhez:
             u.addMessage(msg);
             userRepository.save(u);
-        }, () -> {//Ha nem ismert megy statikus taghoz (ha nincs benne seed-eld újra vagy nézd meg a fájlt):
-            //Még a user seeder nincs kész most vettem észre javítani fogom!
-            Optional<User> anon = userRepository.findByUsername("ANONYMOUS");
-            anon.ifPresent(a -> {
-                a.addMessage(msg);
-                userRepository.save(a);
-            });
-        });
+            //Ha nincs akkor NULL hatékonyabb!
+        }, () -> messageRepository.save(msg));
         return "redirect:/";
     }
 }
