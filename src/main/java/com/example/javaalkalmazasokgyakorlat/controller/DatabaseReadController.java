@@ -29,11 +29,11 @@ public class DatabaseReadController {
                 "Inventor",
                 "Invention"
         });
-        return switch (chosen) {
-            case "Inventor" -> "redirect: /show/inventor";
-            case "Invention" -> "redirect: /show/invention";
-            default -> "DatabaseReadView/index";
-        };
+        switch (chosen) {
+            case "Inventor": return "redirect: /show/inventor";
+            case "Invention": return "redirect: /show/invention";
+            default: return "DatabaseReadView/index";
+        }
     }
     @GetMapping("/inventor")
     public String viewInventors(

@@ -20,10 +20,10 @@ public class CrudController {
                 "Inventor",
                 "Invention"
         });
-        return switch (chosen) {
-            case "Inventor" -> "redirect: /inventor";
-            case "Invention" -> "redirect: /invention";
-            default -> "CrudView/index";
-        };
+        switch (chosen) {
+            case "Inventor": return "redirect: /inventor";
+            case "Invention": return "redirect: /invention";
+            default: return  "CrudView/index";
+        }
     }
 }
