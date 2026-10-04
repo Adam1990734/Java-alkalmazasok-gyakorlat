@@ -4,6 +4,15 @@
       lang="en"
 >
 <body><div layout:fragment="content">
-
+    <form th:fragment="tablechooser" method="get">
+        <div>
+            <label>Choose a table from bellow:</label>
+            <select name="chosen">
+                <option th:text="${chosen}"></option>
+                <option th:each="ch : ${availableTables}" th:if="${ch != chosen}"></option>
+            </select>
+        </div>
+        <button type="submit">Select</button>
+    </form>
 </div></body>
 </html>
