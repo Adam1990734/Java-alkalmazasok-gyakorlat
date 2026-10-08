@@ -1,6 +1,7 @@
 package com.example.javaalkalmazasokgyakorlat.service.impelmentations;
 
 import com.example.javaalkalmazasokgyakorlat.model.invention.Invention;
+import com.example.javaalkalmazasokgyakorlat.model.invention.InventionShortDto;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.Inventor;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorDto;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorResponseDto;
@@ -88,10 +89,10 @@ public class InventorServiceImp implements InventorService {
         dto.setName(inventor.getName());
         dto.setBornat(inventor.getBornat());
         dto.setDiedat(inventor.getDiedat());
-        dto.setInventionIds(
+        dto.setInventions(
                 inventor.getInventions()
                         .stream()
-                        .map(Invention::getId)
+                        .map(e -> new InventionShortDto(e.getId(), e.getName()))
                         .collect(Collectors.toSet())
         );
         return dto;

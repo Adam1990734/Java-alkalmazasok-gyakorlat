@@ -4,6 +4,17 @@
       lang="en"
 >
 <body><div layout:fragment="content">
-
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="invention : ${inventions}">
+                <td th:value="${invention.name}"></td>
+            </tr>
+        </tbody>
+    </table>
 </div></body>
 </html>

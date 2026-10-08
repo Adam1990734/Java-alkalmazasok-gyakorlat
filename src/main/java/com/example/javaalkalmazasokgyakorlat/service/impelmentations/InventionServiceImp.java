@@ -3,6 +3,7 @@ package com.example.javaalkalmazasokgyakorlat.service.impelmentations;
 import com.example.javaalkalmazasokgyakorlat.model.invention.Invention;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionDto;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionResponseDto;
+import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorShortDto;
 import com.example.javaalkalmazasokgyakorlat.repository.InventionRepository;
 import com.example.javaalkalmazasokgyakorlat.service.InventionService;
 import org.springframework.data.domain.PageRequest;
@@ -70,11 +71,12 @@ public class InventionServiceImp implements InventionService {
         InventionResponseDto dto = new InventionResponseDto();
         dto.setId(invention.getId());
         dto.setName(invention.getName());
-        Set<Long> inventorIds = invention.getInventors()
-                .stream()
-                .map(i -> i.getId())
-                .collect(Collectors.toSet());
-        dto.setInventorIds(inventorIds);
+        dto.setInventors(
+                invention.getInventors()
+                    .stream()
+                    .map(i -> new InventorShortDto(i.getId(), i.getName()))
+                    .collect(Collectors.toSet())
+        );
         return dto;
     }
 }

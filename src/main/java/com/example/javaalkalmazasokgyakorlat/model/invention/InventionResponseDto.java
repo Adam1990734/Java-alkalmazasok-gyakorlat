@@ -1,11 +1,13 @@
 package com.example.javaalkalmazasokgyakorlat.model.invention;
 
+import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorShortDto;
+
 import java.util.Set;
 
 public class InventionResponseDto {
     private Long id;
     private String name;
-    private Set<Long> inventorIds;
+    private Set<InventorShortDto> inventors;
     public Long getId() {
         return id;
     }
@@ -18,10 +20,10 @@ public class InventionResponseDto {
     public void setName(String name) {
         this.name = name;
     }
-    public Set<Long> getInventorIds() {
-        return inventorIds;
+    public Set<InventorShortDto> getInventors() {
+        return inventors;
     }
-    public void setInventorIds(Set<Long> inventorIds) {
-        this.inventorIds = inventorIds;
+    public void setInventors(Set<InventorShortDto> inventorIds) {
+        this.inventors = inventorIds;
     }
 }

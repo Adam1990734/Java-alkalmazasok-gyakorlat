@@ -15,10 +15,9 @@ import java.util.List;
 @RequestMapping("/inventor")
 public class InventorController {
     private final InventorService inventorService;
-    private final InventorRepository inventorRepository;
-    public InventorController(InventorService inventorService, InventorRepository inventorRepository) {
+    
+    public InventorController(InventorService inventorService) {
         this.inventorService = inventorService;
-        this.inventorRepository = inventorRepository;
     }
 
     @GetMapping
