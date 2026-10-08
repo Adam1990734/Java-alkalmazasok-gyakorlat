@@ -7,12 +7,19 @@
     <table>
         <thead>
             <tr>
-                <th></th>
+                <th>Name</th>
+                <th>Inventors</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="invention : ${inventions}">
                 <td th:value="${invention.name}"></td>
+                <td>
+                    <ul th:if="${invention.getInventors().size() > 0}">
+                        <li th:each="inventor : ${invention.getInventors()}" th:text="${inventor.name}"></li>
+                    </ul>
+                    <p th:if="${invention.getInventors().size() == 0}">There is no related inventor yet!</p>
+                </td>
             </tr>
         </tbody>
     </table>

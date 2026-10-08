@@ -4,6 +4,23 @@
       lang="en"
 >
 <body><div layout:fragment="content">
-
+    <div>
+        <h2>Invention Details</h2>
+        <div>
+            <div>
+                <span>Name</span>
+                <span th:text="${invention.name}"></span>
+            </div>
+            <div>
+                <th:block th:if="${invention.getInventors().size() > 0}">
+                    <span>Related Inventors</span>
+                    <ul>
+                        <li th:each="inventor : ${invention.getInventors()}" th:text="${inventor.name}"></li>
+                    </ul>
+                </th:block>
+                <span th:if="${invention.getInventors().size() == 0}">There is no related inventor</span>
+            </div>
+        </div>
+    </div>
 </div></body>
 </html>

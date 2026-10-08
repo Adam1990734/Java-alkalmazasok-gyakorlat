@@ -4,6 +4,31 @@
       lang="en"
 >
 <body><div layout:fragment="content">
-
+    <div>
+        <h2>Inventor Details</h2>
+        <div>
+            <div>
+                <span>Name</span>
+                <span th:text="${inventor.name}"></span>
+            </div>
+            <div>
+                <span>Born in</span>
+                <span th:text="${inventor.bornat}"></span>
+            </div>
+            <div>
+                <span>Died in</span>
+                <span th:text="${inventor.diedat}"></span>
+            </div>
+            <div>
+                <th:block th:if="${inventor.getInventions().size() > 0}">
+                    <span>Related Inventions</span>
+                    <ul>
+                        <li th:each="invention : ${inventor.getInventions()}" th:text="${invention.name}"></li>
+                    </ul>
+                </th:block>
+                <span th:if="${inventor.getInventions().size() == 0}">There is no related invention</span>
+            </div>
+        </div>
+    </div>
 </div></body>
 </html>

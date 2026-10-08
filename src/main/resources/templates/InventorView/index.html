@@ -4,6 +4,27 @@
       lang="en"
 >
 <body><div layout:fragment="content">
-
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Born date</th>
+            <th>Died date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="inventor : ${inventors}">
+            <td th:value="${inventor.name}"></td>
+            <td th:value="${inventor.bornat}"></td>
+            <td th:value="${inventor.diedat}"></td>
+            <td>
+                <ul th:if="${inventor.getInventions().size() > 0}">
+                    <li th:each="invention : ${inventor.getInventions()}" th:text="${invention.name}"></li>
+                </ul>
+                <p th:if="${inventor.getInventions().size() == 0}">There is no related invention yet!</p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div></body>
 </html>

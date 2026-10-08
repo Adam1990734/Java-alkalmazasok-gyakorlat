@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/inventor")
 public class InventorController {
     private final InventorService inventorService;
-    
+
     public InventorController(InventorService inventorService) {
         this.inventorService = inventorService;
     }
@@ -27,7 +27,7 @@ public class InventorController {
             Model model
     ) {
         List<InventorResponseDto> inventors = inventorService.findAll(page, len);
-        model.addAttribute("inventor", inventors);
+        model.addAttribute("inventors", inventors);
         model.addAttribute("len", len);
         model.addAttribute("lastpage", page);
         model.addAttribute("allcount", inventorService.countAll());
@@ -36,7 +36,7 @@ public class InventorController {
     @GetMapping("/details/{id}")
     public String details(@PathVariable Long id, Model model) {
         InventorResponseDto inventor = inventorService.findById(id);
-        model.addAttribute("invention", inventor);
+        model.addAttribute("inventor", inventor);
         return "InventorView/details";
     }
     @GetMapping("/create")
