@@ -35,4 +35,8 @@ public class Invention {
     public Set<Inventor> getInventors() {
         return inventors;
     }
+
+    public void addInventor(Inventor inventor) {
+        this.inventors.add(inventor);
+    }
 }

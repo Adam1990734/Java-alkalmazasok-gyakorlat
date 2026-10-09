@@ -61,4 +61,8 @@ public class Inventor {
     public Set<Invention> getInventions() {
         return inventions;
     }
+
+    public void addInvention(Invention invention) {
+        this.inventions.add(invention);
+    }
 }

@@ -1,10 +1,10 @@
 package com.example.javaalkalmazasokgyakorlat.service.impelmentations;
 
-import com.example.javaalkalmazasokgyakorlat.model.invention.Invention;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionShortDto;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.Inventor;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorDto;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorResponseDto;
+import com.example.javaalkalmazasokgyakorlat.repository.InventionRepository;
 import com.example.javaalkalmazasokgyakorlat.repository.InventorRepository;
 import com.example.javaalkalmazasokgyakorlat.service.InventorService;
 import org.springframework.data.domain.PageRequest;
@@ -16,9 +16,11 @@ import java.util.stream.Collectors;
 @Service
 public class InventorServiceImp implements InventorService {
     private final InventorRepository repository;
+    private  final InventionRepository inventionRepository;
 
-    public InventorServiceImp(InventorRepository repository) {
+    public InventorServiceImp(InventorRepository repository, InventionRepository inventionRepository) {
         this.repository = repository;
+        this.inventionRepository = inventionRepository;
     }
 
     @Override
@@ -44,6 +46,8 @@ public class InventorServiceImp implements InventorService {
         if (dto.getDiedat() != null) {
             inventor.setDiedat(dto.getDiedat());
         }
+        for(var invention : this.inventionRepository.findAllById(dto.getInventions()))
+            inventor.addInvention(invention);
         return toDto(repository.save(inventor));
     }
 
@@ -59,6 +63,8 @@ public class InventorServiceImp implements InventorService {
         if (dto.getDiedat() != null) {
             inventor.setDiedat(dto.getDiedat());
         }
+        for(var invention : this.inventionRepository.findAllById(dto.getInventions()))
+            inventor.addInvention(invention);
         return toDto(repository.save(inventor));
     }
 

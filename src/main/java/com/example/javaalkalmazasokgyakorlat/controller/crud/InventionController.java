@@ -2,8 +2,9 @@ package com.example.javaalkalmazasokgyakorlat.controller.crud;
 
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionDto;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionResponseDto;
-import com.example.javaalkalmazasokgyakorlat.repository.InventionRepository;
+import com.example.javaalkalmazasokgyakorlat.repository.InventorRepository;
 import com.example.javaalkalmazasokgyakorlat.service.InventionService;
+import com.example.javaalkalmazasokgyakorlat.service.InventorService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +16,11 @@ import java.util.List;
 @RequestMapping("/invention")
 public class InventionController {
     private final InventionService inventionService;
+    private final InventorService inventorService;
 
-    public InventionController(InventionService inventionService) {
+    public InventionController(InventionService inventionService, InventorService inventorService) {
         this.inventionService = inventionService;
+        this.inventorService = inventorService;
     }
 
     @GetMapping

@@ -1,7 +1,6 @@
 package com.example.javaalkalmazasokgyakorlat.service;
 
 import com.example.javaalkalmazasokgyakorlat.model.invention.*;
-import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorResponseDto;
 
 import java.util.List;
 

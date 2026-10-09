@@ -2,7 +2,6 @@ package com.example.javaalkalmazasokgyakorlat.controller.crud;
 
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorDto;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorResponseDto;
-import com.example.javaalkalmazasokgyakorlat.repository.InventorRepository;
 import com.example.javaalkalmazasokgyakorlat.service.InventorService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
