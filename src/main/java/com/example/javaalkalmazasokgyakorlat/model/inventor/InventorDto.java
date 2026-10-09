@@ -18,7 +18,7 @@ public class InventorDto {
     private Integer diedat;
 
     @NotEmpty
-    private Set<Long> inventions;
+    private Set<Long> inventionIds;
 
     public String getName() {
         return name;
@@ -39,11 +39,11 @@ public class InventorDto {
         this.diedat = diedat;
     }
 
-    public Set<Long> getInventions() {
-        return inventions;
+    public Set<Long> getInventionIds() {
+        return inventionIds;
     }
 
-    public void setInventions(Set<Long> inventions) {
-        this.inventions = inventions;
+    public void setInventionIds(Set<Long> inventionIds) {
+        this.inventionIds = inventionIds;
     }
 }

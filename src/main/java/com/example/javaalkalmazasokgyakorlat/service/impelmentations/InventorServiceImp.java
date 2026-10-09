@@ -47,7 +47,7 @@ public class InventorServiceImp implements InventorService {
         if (dto.getDiedat() != null) {
             inventor.setDiedat(dto.getDiedat());
         }
-        for(var invention : this.inventionRepository.findAllById(dto.getInventions()))
+        for(var invention : this.inventionRepository.findAllById(dto.getInventionIds()))
             inventor.addInvention(invention);
         return toDto(repository.save(inventor));
     }
@@ -64,7 +64,7 @@ public class InventorServiceImp implements InventorService {
         if (dto.getDiedat() != null) {
             inventor.setDiedat(dto.getDiedat());
         }
-        for(var invention : this.inventionRepository.findAllById(dto.getInventions()))
+        for(var invention : this.inventionRepository.findAllById(dto.getInventionIds()))
             inventor.addInvention(invention);
         return toDto(repository.save(inventor));
     }

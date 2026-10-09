@@ -4,6 +4,13 @@
       lang="en"
 >
 <body><div layout:fragment="content">
-
+    <form method="post" th:object="${invention}">
+        <input hidden="hidden" readonly th:field="*{id}">
+        <div>
+            <label>Name</label>
+            <input readonly th:field="*{name}">
+        </div>
+        <button type="submit">Save</button>
+    </form>
 </div></body>
 </html>

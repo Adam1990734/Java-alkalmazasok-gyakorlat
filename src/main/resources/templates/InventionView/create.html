@@ -10,10 +10,8 @@
             <input th:field="*{name}">
         </div>
         <div>
-            <label>Inventors</label>
-            <select th:field="*{inventorIds}">
-                <option th:each="inventor : ${invention.getInventorIds()}" th:value="${inventor}"></option>
-            </select>
+            <label>Inventors:</label>
+            <input type="checkbox" th:each="inventor : ${inventors}" th:value="${inventor.id}" th:text="${inventor.name}">
         </div>
         <button type="submit">Add</button>
     </form>

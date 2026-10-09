@@ -57,7 +57,7 @@ public class InventionController {
     public String updateForm(@PathVariable Long id, Model model) {
         InventionResponseDto invention = inventionService.findById(id);
         model.addAttribute("invention", invention);
-        model.addAttribute("inventors", this.inventorService.findAllGetAsMinimal(0, 19));
+        model.addAttribute("inventors", this.inventorService.findAllGetAsMinimal(0, 20));
         return "InventionView/update";
     }
     @PutMapping("/update/{id}")
