@@ -3,6 +3,7 @@ package com.example.javaalkalmazasokgyakorlat.service.impelmentations;
 import com.example.javaalkalmazasokgyakorlat.model.invention.Invention;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionDto;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionResponseDto;
+import com.example.javaalkalmazasokgyakorlat.model.invention.InventionShortDto;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorShortDto;
 import com.example.javaalkalmazasokgyakorlat.repository.InventionRepository;
 import com.example.javaalkalmazasokgyakorlat.repository.InventorRepository;
@@ -68,6 +69,25 @@ public class InventionServiceImp implements InventionService {
                 .map(this::toDto)
                 .toList();
     }
+    @Override
+    public List<InventionShortDto> findAllGetAsMinimal() {
+        return repository.findAll()
+                .stream()
+                .map(this::toShortDto)
+                .toList();
+    }
+    @Override
+    public List<InventionShortDto> findAllGetAsMinimal(int page, int size) {
+        return repository.findAll(
+                        PageRequest.of(
+                                page,
+                                size
+                        )
+                )
+                .stream()
+                .map(this::toShortDto)
+                .toList();
+    }
 
     @Override
     public Long countAll() { return repository.count(); }
@@ -82,6 +102,12 @@ public class InventionServiceImp implements InventionService {
                     .map(i -> new InventorShortDto(i.getId(), i.getName()))
                     .collect(Collectors.toSet())
         );
+        return dto;
+    }
+    private InventionShortDto toShortDto(Invention invention) {
+        InventionShortDto dto = new InventionShortDto();
+        dto.setId(invention.getId());
+        dto.setName(invention.getName());
         return dto;
     }
 }

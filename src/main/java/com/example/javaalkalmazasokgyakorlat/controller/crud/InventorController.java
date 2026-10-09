@@ -2,6 +2,7 @@ package com.example.javaalkalmazasokgyakorlat.controller.crud;
 
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorDto;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorResponseDto;
+import com.example.javaalkalmazasokgyakorlat.service.InventionService;
 import com.example.javaalkalmazasokgyakorlat.service.InventorService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -14,9 +15,11 @@ import java.util.List;
 @RequestMapping("/inventor")
 public class InventorController {
     private final InventorService inventorService;
+    private final InventionService inventionService;
 
-    public InventorController(InventorService inventorService) {
+    public InventorController(InventorService inventorService, InventionService inventionService) {
         this.inventorService = inventorService;
+        this.inventionService = inventionService;
     }
 
     @GetMapping
@@ -41,6 +44,7 @@ public class InventorController {
     @GetMapping("/create")
     public String createForm(Model model) {
         model.addAttribute("inventor", new InventorDto());
+        model.addAttribute("inventions", this.inventorService.findAllGetAsMinimal(0, 20));
         return "InventorView/create";
     }
     @PostMapping("/create")
@@ -52,6 +56,7 @@ public class InventorController {
     public String updateForm(@PathVariable Long id, Model model) {
         InventorResponseDto inventor = inventorService.findById(id);
         model.addAttribute("inventor", inventor);
+        model.addAttribute("inventions", this.inventorService.findAllGetAsMinimal(0, 19));
         return "InventorView/update";
     }
     @PutMapping("/update/{id}")

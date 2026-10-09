@@ -45,6 +45,7 @@ public class InventionController {
     @GetMapping("/create")
     public String createForm(Model model) {
         model.addAttribute("invention", new InventionDto());
+        model.addAttribute("inventors", this.inventorService.findAllGetAsMinimal(0, 20));
         return "InventionView/create";
     }
     @PostMapping("/create")
@@ -56,6 +57,7 @@ public class InventionController {
     public String updateForm(@PathVariable Long id, Model model) {
         InventionResponseDto invention = inventionService.findById(id);
         model.addAttribute("invention", invention);
+        model.addAttribute("inventors", this.inventorService.findAllGetAsMinimal(0, 19));
         return "InventionView/update";
     }
     @PutMapping("/update/{id}")

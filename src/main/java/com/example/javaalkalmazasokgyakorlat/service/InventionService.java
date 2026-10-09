@@ -7,6 +7,8 @@ import java.util.List;
 public interface InventionService {
     List<InventionResponseDto> findAll();
     List<InventionResponseDto> findAll(int page, int size);
+    List<InventionShortDto> findAllGetAsMinimal();
+    List<InventionShortDto> findAllGetAsMinimal(int page, int size);
     InventionResponseDto findById(Long id);
     InventionResponseDto create(InventionDto dto);
     InventionResponseDto update(Long id, InventionDto dto);
