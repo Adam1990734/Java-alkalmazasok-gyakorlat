@@ -1,10 +1,10 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
     <script th:fragment="barDiagram" th:inline="javascript">
         const inventors = [[${inventorStats.![name]}]];
-        const counts = [[${inventorStats.![inventionCount]}]];
+        const counts = [[${inventorStats.![count]}]];
 
         new Chart(
-            document.getElementById('inventorChart'),
+            document.getElementById('barDiagram'),
             {
                 type: 'bar',
                 data: {
@@ -18,13 +18,12 @@
             }
         );
     </script>
-    </script>
 
-    <script th:fragment="" th:inline="javascript">
+    <script th:fragment="timelineDiagram" th:inline="javascript">
         const timeline = [[${timelineData}]];
-
+        const currentYear = new Date().getFullYear();
         new Chart(
-            document.getElementById('timelineChart'),
+            document.getElementById('timelineDiagram'),
             {
                 type: 'bar',
                 data: {
@@ -32,8 +31,8 @@
                     datasets: [{
                         label: 'Életévek',
                         data: timeline.map(x => [
-                            x.birthYear,
-                            x.deathYear
+                            Number(x.birthYear),
+                            Number(x.deathYear) === 0 ? currentYear : Number(x.deathYear)
                         ]),
                         backgroundColor: '#4BC0C0'
                     }]
@@ -42,6 +41,8 @@
                     indexAxis: 'y',
                     scales: {
                         x: {
+                            min: 1700,
+                            max: currentYear,
                             title: {
                                 display: true,
                                 text: 'Év'

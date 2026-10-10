@@ -3,5 +3,15 @@
       layout:decorate="~{Shared/mainlayout}"
       lang="en"
 ><body><div layout:fragment="content">
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div>
+        <h2>Bar Diagram</h2>
+        <canvas id="barDiagram"></canvas>
+    </div>
+    <div>
+        <h2>Timeline Diagram</h2>
+        <canvas id="timelineDiagram"></canvas>
+    </div>
+    <script th:replace="~{DatabaseReadView/diagrams :: barDiagram}"></script>
+    <script th:replace="~{DatabaseReadView/diagrams :: timelineDiagram}"></script>
 </div></body></html>

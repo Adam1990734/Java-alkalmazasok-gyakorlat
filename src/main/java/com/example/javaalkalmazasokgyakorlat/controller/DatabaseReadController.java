@@ -28,13 +28,14 @@ public class DatabaseReadController {
         model.addAttribute("availableTables", new String[]{
                 "Inventor",
                 "Invention",
-                "All"
+                "All",
+                "Diagrams"
         });
         switch (chosen) {
             case "Inventor": return "redirect:/show/inventors";
             case "Invention": return "redirect:/show/inventions";
             case "All": return "redirect:/show/all";
-            case "Diagram": return "redirect:/show/analyse";
+            case "Diagrams": return "redirect:/show/analyse";
             default: return "DatabaseReadView/index";
         }
     }
