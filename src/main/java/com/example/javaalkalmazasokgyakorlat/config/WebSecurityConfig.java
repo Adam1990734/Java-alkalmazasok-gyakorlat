@@ -50,7 +50,7 @@ public class WebSecurityConfig {
                                             "/contact", "/show/**"
                                 ).permitAll()
                                 .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
-                                .requestMatchers("/admin").hasRole("ADMIN")
+                                .requestMatchers("/admin", "/crud").hasRole("ADMIN")
                                 .anyRequest()
                                 .authenticated()
                 ).formLogin(form ->

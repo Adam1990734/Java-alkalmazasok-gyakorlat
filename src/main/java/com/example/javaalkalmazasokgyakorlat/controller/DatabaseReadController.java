@@ -30,12 +30,12 @@ public class DatabaseReadController {
                 "Invention"
         });
         switch (chosen) {
-            case "Inventor": return "redirect: /show/inventor";
-            case "Invention": return "redirect: /show/invention";
+            case "Inventor": return "redirect: /show/inventors";
+            case "Invention": return "redirect: /show/inventions";
             default: return "DatabaseReadView/index";
         }
     }
-    @GetMapping("/inventor")
+    @GetMapping("/inventors")
     public String viewInventors(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "len", defaultValue = "20", required = false) int len,
@@ -48,7 +48,7 @@ public class DatabaseReadController {
         model.addAttribute("allcount", inventorService.countAll());
         return "DatabaseReadView/inventor";
     }
-    @GetMapping("/invention")
+    @GetMapping("/inventions")
     public String viewInventions(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
             @RequestParam(name = "len", defaultValue = "20", required = false) int len,

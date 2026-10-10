@@ -9,7 +9,7 @@
             <label>Choose a table from bellow:</label>
             <select name="chosen">
                 <option th:text="${chosen}"></option>
-                <option th:each="ch : ${availableTables}" th:if="${ch != chosen}"></option>
+                <option th:each="ch : ${availableTables}" th:if="${ch != chosen}" th:value="${ch}" th:text="${ch}"></option>
             </select>
         </div>
         <button type="submit">Select</button>

@@ -11,7 +11,10 @@
         </div>
         <div>
             <label>Inventors:</label>
-            <input type="checkbox" th:each="inventor : ${inventors}" th:value="${inventor.id}" th:text="${inventor.name}">
+            <th:block th:each="inventor : ${inventors}">
+                <input type="checkbox" th:value="${inventor.id}" th:text="${inventor.name}">
+                <br>
+            </th:block>
         </div>
         <button type="submit">Add</button>
     </form>

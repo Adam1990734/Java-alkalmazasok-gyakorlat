@@ -4,6 +4,7 @@
       lang="en"
 >
 <body><div layout:fragment="content">
+    <a th:href="@{/inventions/create}">Create new invention</a>
     <table>
         <thead>
             <tr>
@@ -15,10 +16,9 @@
             <tr th:each="invention : ${inventions}">
                 <td th:text="${invention.name}"></td>
                 <td>
-                    <ul th:if="${invention.getInventors().size() > 0}">
-                        <li th:each="inventor : ${invention.getInventors()}" th:text="${inventor.name}"></li>
-                    </ul>
-                    <p th:if="${invention.getInventors().size() == 0}">There is no related inventor yet!</p>
+                    <a th:href="@{/inventions/details/{id}(id=${invention.id})}">Details</a>
+                    <a th:href="@{/inventions/update/{id}(id=${invention.id})}">Edit</a>
+                    <a th:href="@{/inventions/delete/{id}(id=${invention.id})}">Remove</a>
                 </td>
             </tr>
         </tbody>
