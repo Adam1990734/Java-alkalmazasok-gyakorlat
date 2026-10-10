@@ -30,9 +30,11 @@ public class InventionController {
     ) {
         List<InventionResponseDto> inventions = inventionService.findAll(page, len);
         model.addAttribute("inventions", inventions);
+        //Lapozáshoz (pager-ben):
         model.addAttribute("len", len);
         model.addAttribute("lastpage", page);
         model.addAttribute("allcount", inventionService.countAll());
+        model.addAttribute("datasize", inventions.size());
         return "InventionView/index";
     }
     @GetMapping("/details/{id}")

@@ -23,10 +23,13 @@ public class MessageContorller {
             @RequestParam(name = "page", required = false, defaultValue = "0") int page,
             @RequestParam(name = "len", required = false, defaultValue = "20") int len,
             Model model) {
-        model.addAttribute("messages", messageService.findAllDescByDatetime(page, len));
+        var messages = messageService.findAllDescByDatetime(page, len);
+        model.addAttribute("messages", messages);
+
         model.addAttribute("len", len);
         model.addAttribute("lastpage", page);
         model.addAttribute("allcount", messageService.countAll());
+        model.addAttribute("datasize", messages.size());
         return "MessageView/index";
     }
 }

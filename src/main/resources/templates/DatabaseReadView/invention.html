@@ -4,6 +4,18 @@
       lang="en"
 >
 <body><div layout:fragment="content">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Inventors</th>
+        </tr>
+        </thead>
+        <tbody>
 
+        </tbody>
+    </table>
+    <div th:replace="~{Shared/pager :: pager}"></div>
+    <a th:href="@{/}"></a>
 </div></body>
 </html>

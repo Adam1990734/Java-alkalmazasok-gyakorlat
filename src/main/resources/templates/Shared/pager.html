@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <div th:fragment="pager">
+        <form th:if="${(lastpage + 1) * len < allcount}" method="get">
+            <input hidden="hidden" name="page" th:value="${lastpage + 1}">
+            <button type="submit">Next</button>
+        </form>
+        <br>
+        <form th:if="${(lastpage - 1) >= 0 && (allcount - datasize) > 0}" method="get">
+            <input hidden="hidden" name="page" th:value="${lastpage - 1}">
+            <button type="submit">Previous</button>
+        </form>
+    </div>
+</html>

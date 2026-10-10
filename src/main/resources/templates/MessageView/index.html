@@ -22,14 +22,6 @@
         </tbody>
     </table>
     <br>
-    <form th:if="${(lastpage + 1) * len < allcount}" method="get">
-        <input hidden="hidden" name="page" th:value="${lastpage + 1}">
-        <button type="submit">Next</button>
-    </form>
-    <br>
-    <form th:if="${(lastpage - 1) >= 0 && (allcount - messages.size()) > 0}" method="get">
-        <input hidden="hidden" name="page" th:value="${lastpage - 1}">
-        <button type="submit">Previous</button>
-    </form>
+    <div th:replace="~{Shared/pager :: pager}"></div>
 </div></body>
 </html>

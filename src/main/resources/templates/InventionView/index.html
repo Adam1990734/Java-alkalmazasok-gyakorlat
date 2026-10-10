@@ -5,7 +5,7 @@
 >
 <body><div layout:fragment="content">
     <a th:href="@{/inventions/create}">Create new invention</a>
-    <table>
+    <table th:fragment="inventionDisplayer">
         <thead>
             <tr>
                 <th>Name</th>
@@ -23,5 +23,7 @@
             </tr>
         </tbody>
     </table>
+    <div th:replace="~{Shared/pager :: pager}"></div>
+    <a th:href="@{/inventions}">Back</a>
 </div></body>
 </html>

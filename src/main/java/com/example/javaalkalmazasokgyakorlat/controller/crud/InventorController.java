@@ -35,9 +35,11 @@ public class InventorController {
     ) {
         List<InventorResponseDto> inventors = inventorService.findAll(page, len);
         model.addAttribute("inventors", inventors);
+        //Lapozáshoz (pager-ben):
         model.addAttribute("len", len);
         model.addAttribute("lastpage", page);
         model.addAttribute("allcount", inventorService.countAll());
+        model.addAttribute("datasize", inventors.size());
         return "InventorView/index";
     }
     @GetMapping("/details/{id}")
