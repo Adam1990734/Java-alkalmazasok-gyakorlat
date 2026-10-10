@@ -11,22 +11,11 @@ public class InventionDto {
     @Size(max = 80)
     private String name;
 
-    @NotEmpty
-    private Set<Long> inventors;
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<Long> getInventors() {
-        return inventors;
-    }
-
-    public void setInventors(Set<Long> inventors) {
-        this.inventors = inventors;
     }
 }

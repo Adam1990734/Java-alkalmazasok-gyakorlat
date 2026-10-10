@@ -9,13 +9,6 @@
             <label>Name</label>
             <input th:field="*{name}">
         </div>
-        <div>
-            <label>Inventors:</label>
-            <th:block th:each="inventor : ${inventors}">
-                <input type="checkbox" th:value="${inventor.id}" th:text="${inventor.name}">
-                <br>
-            </th:block>
-        </div>
         <button type="submit">Add</button>
     </form>
     <a th:href="@{/inventions}">Back</a>

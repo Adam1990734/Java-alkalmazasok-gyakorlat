@@ -2,7 +2,6 @@ package com.example.javaalkalmazasokgyakorlat.controller.crud;
 
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionDto;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionResponseDto;
-import com.example.javaalkalmazasokgyakorlat.repository.InventorRepository;
 import com.example.javaalkalmazasokgyakorlat.service.InventionService;
 import com.example.javaalkalmazasokgyakorlat.service.InventorService;
 import jakarta.validation.Valid;

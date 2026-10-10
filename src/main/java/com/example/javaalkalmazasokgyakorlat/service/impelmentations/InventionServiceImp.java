@@ -18,10 +18,8 @@ import java.util.stream.Collectors;
 @Service
 public class InventionServiceImp implements InventionService {
     private final InventionRepository repository;
-    private final InventorRepository inventorRepository;
-    public InventionServiceImp(InventionRepository repository, InventorRepository inventorRepository) {
+    public InventionServiceImp(InventionRepository repository) {
         this.repository = repository;
-        this.inventorRepository = inventorRepository;
     }
     @Override
     public List<InventionResponseDto> findAll() {
@@ -40,8 +38,6 @@ public class InventionServiceImp implements InventionService {
     public InventionResponseDto create(InventionDto dto) {
         Invention invention = new Invention();
         invention.setName(dto.getName());
-        for(var inventor : inventorRepository.findAllById(dto.getInventors()))
-            invention.addInventor(inventor);
         return toDto(repository.save(invention));
     }
     @Override
@@ -49,8 +45,6 @@ public class InventionServiceImp implements InventionService {
         Invention invention = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Invention not found"));
         invention.setName(dto.getName());
-        for(var inventor : inventorRepository.findAllById(dto.getInventors()))
-            invention.addInventor(inventor);
         return toDto(repository.save(invention));
     }
     @Override
@@ -115,7 +109,6 @@ public class InventionServiceImp implements InventionService {
     public InventionDto toSimpDto(InventionResponseDto invention) {
         var dto = new InventionDto();
         dto.setName(invention.getName());
-        dto.setInventors(invention.getInventors().stream().mapToLong(InventorShortDto::getId).boxed().collect(Collectors.toSet()));
         return dto;
     }
 }

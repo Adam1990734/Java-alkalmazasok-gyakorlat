@@ -9,19 +9,6 @@
             <label>Name</label>
             <input th:field="*{name}">
         </div>
-        <div>
-            <label>Inventors</label> <br>
-            <th:block th:each="inv : ${connectedInventors}">
-                <input type="checkbox" checked th:field="*{inventors}" th:value="${inv.id}">
-                <span th:text="${inv.name}"></span>
-                <br>
-            </th:block>
-            <th:block th:each="inv : ${otherInventors}">
-                <input type="checkbox" th:field="*{inventors}" th:value="${inv.id}">
-                <span th:text="${inv.name}"></span>
-                <br>
-            </th:block>
-        </div>
         <button type="submit">Add</button>
     </form>
     <a th:href="@{/inventions}">Back</a>
