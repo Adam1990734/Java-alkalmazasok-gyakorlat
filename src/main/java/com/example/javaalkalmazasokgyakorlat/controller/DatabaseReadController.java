@@ -34,6 +34,7 @@ public class DatabaseReadController {
             case "Inventor": return "redirect:/show/inventors";
             case "Invention": return "redirect:/show/inventions";
             case "All": return "redirect:/show/all";
+            case "Diagram": return "redirect:/show/analyse";
             default: return "DatabaseReadView/index";
         }
     }
@@ -81,5 +82,11 @@ public class DatabaseReadController {
         model.addAttribute("allcount", inventorService.countAll());
         model.addAttribute("datasize", all.size());
         return "DatabaseReadView/all";
+    }
+    @GetMapping("/analyse")
+    public String viewDiagrams(Model model) {
+        model.addAttribute("inventorStats", inventorService.getInventorNameWithCountOfInventions());
+        model.addAttribute("timelineData", inventorService.getInventorTimeLineStats());
+        return "DatabaseReadView/analyse";
     }
 }

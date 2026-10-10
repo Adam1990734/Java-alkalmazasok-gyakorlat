@@ -1,10 +1,7 @@
 package com.example.javaalkalmazasokgyakorlat.service.impelmentations;
 
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionShortDto;
-import com.example.javaalkalmazasokgyakorlat.model.inventor.Inventor;
-import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorDto;
-import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorResponseDto;
-import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorShortDto;
+import com.example.javaalkalmazasokgyakorlat.model.inventor.*;
 import com.example.javaalkalmazasokgyakorlat.repository.InventionRepository;
 import com.example.javaalkalmazasokgyakorlat.repository.InventorRepository;
 import com.example.javaalkalmazasokgyakorlat.service.InventorService;
@@ -138,4 +135,11 @@ public class InventorServiceImp implements InventorService {
         dto.setInventions(inventor.getInventions().stream().mapToLong(InventionShortDto::getId).boxed().collect(Collectors.toSet()));
         return dto;
     }
+
+    @Override
+    public List<InventorCountDto> getInventorNameWithCountOfInventions() {
+        return repository.getStatistics();
+    }
+    @Override
+    public List<InventorTimeLineDto> getInventorTimeLineStats() { return  repository.getTimeLineData(); }
 }

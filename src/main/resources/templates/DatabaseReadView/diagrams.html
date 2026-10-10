@@ -1,0 +1,55 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <script th:fragment="barDiagram" th:inline="javascript">
+        const inventors = [[${inventorStats.![name]}]];
+        const counts = [[${inventorStats.![inventionCount]}]];
+
+        new Chart(
+            document.getElementById('inventorChart'),
+            {
+                type: 'bar',
+                data: {
+                    labels: inventors,
+                    datasets: [{
+                        label: 'Találmányok száma',
+                        data: counts,
+                        backgroundColor: '#36A2EB'
+                    }]
+                }
+            }
+        );
+    </script>
+    </script>
+
+    <script th:fragment="" th:inline="javascript">
+        const timeline = [[${timelineData}]];
+
+        new Chart(
+            document.getElementById('timelineChart'),
+            {
+                type: 'bar',
+                data: {
+                    labels: timeline.map(x => x.name),
+                    datasets: [{
+                        label: 'Életévek',
+                        data: timeline.map(x => [
+                            x.birthYear,
+                            x.deathYear
+                        ]),
+                        backgroundColor: '#4BC0C0'
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Év'
+                            }
+                        }
+                    }
+                }
+            }
+        );
+    </script>
+</html>
