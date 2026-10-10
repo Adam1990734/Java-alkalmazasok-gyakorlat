@@ -7,23 +7,24 @@
     <a th:href="@{/inventors/create}">Create a new inventor</a>
     <table th:fragment="inventorDisplayer">
         <thead>
-        <tr>
-            <th>Name</th>
-            <th>Born date</th>
-            <th>Died date</th>
-        </tr>
+            <tr>
+                <th>Name</th>
+                <th>Born date</th>
+                <th>Died date</th>
+                <th>Operations</th>
+            </tr>
         </thead>
         <tbody>
-        <tr th:each="inventor : ${inventors}">
-            <td th:text="${inventor.name}"></td>
-            <td th:text="${inventor.bornat}"></td>
-            <td th:text="${inventor.diedat}"></td>
-            <td>
-                <a th:href="@{/inventors/details/{id}(id=${inventor.id})}">Details</a>
-                <a th:href="@{/inventors/update/{id}(id=${inventor.id})}">Edit</a>
-                <a th:href="@{/inventors/delete/{id}(id=${inventor.id})}">Remove</a>
-            </td>
-        </tr>
+            <tr th:each="inventor : ${inventors}">
+                <td th:text="${inventor.name}"></td>
+                <td th:text="${inventor.bornat}"></td>
+                <td th:text="${inventor.diedat}"></td>
+                <td>
+                    <a th:href="@{/inventors/details/{id}(id=${inventor.id})}">Details</a>
+                    <a th:href="@{/inventors/update/{id}(id=${inventor.id})}">Edit</a>
+                    <a th:href="@{/inventors/delete/{id}(id=${inventor.id})}">Remove</a>
+                </td>
+            </tr>
         </tbody>
     </table>
     <div th:replace="~{Shared/pager :: pager}"></div>

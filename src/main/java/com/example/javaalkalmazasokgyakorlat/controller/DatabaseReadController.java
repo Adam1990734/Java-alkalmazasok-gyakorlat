@@ -27,11 +27,13 @@ public class DatabaseReadController {
         model.addAttribute("chosen", chosen);
         model.addAttribute("availableTables", new String[]{
                 "Inventor",
-                "Invention"
+                "Invention",
+                "All"
         });
         switch (chosen) {
-            case "Inventor": return "redirect: /show/inventors";
-            case "Invention": return "redirect: /show/inventions";
+            case "Inventor": return "redirect:/show/inventors";
+            case "Invention": return "redirect:/show/inventions";
+            case "All": return "redirect:/show/all";
             default: return "DatabaseReadView/index";
         }
     }
@@ -43,9 +45,11 @@ public class DatabaseReadController {
     ) {
         var inventors = inventorService.findAll(page, len);
         model.addAttribute("inventors", inventors);
+
         model.addAttribute("len", len);
         model.addAttribute("lastpage", page);
         model.addAttribute("allcount", inventorService.countAll());
+        model.addAttribute("datasize", inventors.size());
         return "DatabaseReadView/inventor";
     }
     @GetMapping("/inventions")
@@ -56,9 +60,26 @@ public class DatabaseReadController {
     ) {
         var inventions = inventionService.findAll(page, len);
         model.addAttribute("inventions", inventions);
+
         model.addAttribute("len", len);
         model.addAttribute("lastpage", page);
         model.addAttribute("allcount", inventionService.countAll());
+        model.addAttribute("datasize", inventions.size());
         return "DatabaseReadView/invention";
+    }
+    @GetMapping("/all")
+    public String viewAll(
+            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
+            @RequestParam(name = "len", defaultValue = "20", required = false) int len,
+            Model model
+    ) {
+        var all = inventorService.findAll(page, len);
+        model.addAttribute("all", all);
+
+        model.addAttribute("len", len);
+        model.addAttribute("lastpage", page);
+        model.addAttribute("allcount", inventorService.countAll());
+        model.addAttribute("datasize", all.size());
+        return "DatabaseReadView/all";
     }
 }

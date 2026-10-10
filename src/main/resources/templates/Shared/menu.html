@@ -11,27 +11,27 @@
         <span sec:authorize="hasRole('ADMIN')">
             | <a th:href="@{/admin}">Admin</a>
         </span>
+        <span>
+            | <a th:href="@{/contact}">Contact</a>
+        </span>
+        <span sec:authorize="isAuthenticated()">
+            <!-- Ez még nincs kész -->
+            | <a th:href="@{/message}">Messages</a>
+        </span>
+        <span>
+            <!-- Ez még nincs kész -->
+            | <a th:href="@{/show}">Database and Diagram</a>
+        </span>
+        <span sec:authorize="hasRole('ADMIN')">
+            <!-- Ez az adminnak van (nincs még kész) -->
+            | <a th:href="@{/crud}">CRUD</a>
+        </span>
         <span sec:authorize="isAnonymous()">
             | <a th:href="@{/register}">Register</a>
             | <a th:href="@{/login}">Login</a>
         </span>
-        <span>
-            <a th:href="@{/contact}">Contact</a>
-        </span>
         <span sec:authorize="isAuthenticated()">
-            <!-- Ez még nincs kész -->
-            <a th:href="@{/message}">Messages</a>
-        </span>
-        <span>
-            <!-- Ez még nincs kész -->
-            <a th:href="@{/}">Diagram</a>
-        </span>
-        <span sec:authorize="hasRole('ADMIN')">
-            <!-- Ez az adminnak van (nincs még kész) -->
-            <a th:href="@{/crud}">CRUD</a>
-        </span>
-        <span sec:authorize="isAuthenticated()">
-            <form th:action="@{/logout}" method="post" style="display: inline">
+            | <form th:action="@{/logout}" method="post" style="display: inline">
                 <button type="submit">Logout</button>
             </form>
         </span>

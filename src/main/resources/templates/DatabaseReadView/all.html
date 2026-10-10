@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{Shared/mainlayout}"
+      lang="en"
+>
+<body><div layout:fragment="content">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Born In</th>
+                <th>Died In</th>
+                <th>Inventions:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="inventor : ${all}">
+                <td th:text="${inventor.name}"></td>
+                <td th:text="${inventor.bornat}"></td>
+                <td th:text="${inventor.diedat}"></td>
+                <td>
+                    <ul>
+                        <li th:each="invention : ${inventor.getInventions()}" th:text="${invention.name}"></li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div th:replace="~{Shared/pager :: pager}"></div>
+    <a th:href="@{/}"></a>
+</div></body>
+</html>

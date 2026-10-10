@@ -6,13 +6,14 @@
 <body><div layout:fragment="content">
     <table>
         <thead>
-        <tr>
-            <th>Name</th>
-            <th>Inventors</th>
-        </tr>
+            <tr>
+                <th>Name</th>
+            </tr>
         </thead>
         <tbody>
-
+            <tr th:each="invention : ${inventions}">
+                <td th:text="${invention.name}"></td>
+            </tr>
         </tbody>
     </table>
     <div th:replace="~{Shared/pager :: pager}"></div>
