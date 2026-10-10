@@ -19,4 +19,5 @@ public interface InventorService {
     void delete(Long id);
 
     Long countAll();
+    InventorDto toSimpDto(InventorResponseDto inventor);
 }

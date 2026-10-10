@@ -4,8 +4,7 @@
       lang="en"
 >
 <body><div layout:fragment="content">
-    <form method="post" th:object="${inventor}">
-        <input hidden="hidden" readonly th:field="*{id}">
+    <form method="post" th:action="@{/inventors/update/{id}(id=${inventorId})}" th:object="${inventor}">
         <div>
             <label>Name</label>
             <input th:field="*{name}">
@@ -19,13 +18,15 @@
             <input th:field="*{diedat}">
         </div>
         <div>
-            <label>Inventors</label>
-            <th:block th:each="invention : ${inventor.getInventions()}">
-                <input type="checkbox" checked th:value="${invention.id}" th:text="${invention.name}">
+            <label>Inventions</label> <br>
+            <th:block th:each="inv : ${connectedInventions}">
+                <input type="checkbox" checked th:field="*{inventions}" th:value="${inv.id}">
+                <span th:text="${inv.name}"></span>
                 <br>
             </th:block>
-            <th:block th:each="invention : ${inventions}">
-                <input type="checkbox" th:value="${invention.id}" th:text="${invention.name}">
+            <th:block th:each="inv : ${otherInventions}">
+                <input type="checkbox" th:field="*{inventions}" th:value="${inv.id}">
+                <span th:text="${inv.name}"></span>
                 <br>
             </th:block>
         </div>

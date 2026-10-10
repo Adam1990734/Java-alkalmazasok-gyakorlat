@@ -12,7 +12,7 @@ public class InventionDto {
     private String name;
 
     @NotEmpty
-    private Set<Long> inventorIds;
+    private Set<Long> inventors;
 
     public String getName() {
         return name;
@@ -22,11 +22,11 @@ public class InventionDto {
         this.name = name;
     }
 
-    public Set<Long> getInventorIds() {
-        return inventorIds;
+    public Set<Long> getInventors() {
+        return inventors;
     }
 
-    public void setInventorIds(Set<Long> inventorIds) {
-        this.inventorIds = inventorIds;
+    public void setInventors(Set<Long> inventors) {
+        this.inventors = inventors;
     }
 }

@@ -4,6 +4,7 @@ import com.example.javaalkalmazasokgyakorlat.model.invention.Invention;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionDto;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionResponseDto;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionShortDto;
+import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorResponseDto;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorShortDto;
 import com.example.javaalkalmazasokgyakorlat.repository.InventionRepository;
 import com.example.javaalkalmazasokgyakorlat.repository.InventorRepository;
@@ -39,7 +40,7 @@ public class InventionServiceImp implements InventionService {
     public InventionResponseDto create(InventionDto dto) {
         Invention invention = new Invention();
         invention.setName(dto.getName());
-        for(var inventor : inventorRepository.findAllById(dto.getInventorIds()))
+        for(var inventor : inventorRepository.findAllById(dto.getInventors()))
             invention.addInventor(inventor);
         return toDto(repository.save(invention));
     }
@@ -48,7 +49,7 @@ public class InventionServiceImp implements InventionService {
         Invention invention = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Invention not found"));
         invention.setName(dto.getName());
-        for(var inventor : inventorRepository.findAllById(dto.getInventorIds()))
+        for(var inventor : inventorRepository.findAllById(dto.getInventors()))
             invention.addInventor(inventor);
         return toDto(repository.save(invention));
     }
@@ -108,6 +109,13 @@ public class InventionServiceImp implements InventionService {
         InventionShortDto dto = new InventionShortDto();
         dto.setId(invention.getId());
         dto.setName(invention.getName());
+        return dto;
+    }
+    @Override
+    public InventionDto toSimpDto(InventionResponseDto invention) {
+        var dto = new InventionDto();
+        dto.setName(invention.getName());
+        dto.setInventors(invention.getInventors().stream().mapToLong(InventorShortDto::getId).boxed().collect(Collectors.toSet()));
         return dto;
     }
 }

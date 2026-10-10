@@ -1,6 +1,7 @@
 package com.example.javaalkalmazasokgyakorlat.service;
 
 import com.example.javaalkalmazasokgyakorlat.model.invention.*;
+import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorResponseDto;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface InventionService {
     void delete(Long id);
 
     Long countAll();
+
+    InventionDto toSimpDto(InventionResponseDto invention);
 }

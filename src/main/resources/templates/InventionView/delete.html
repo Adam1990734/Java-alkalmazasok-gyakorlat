@@ -4,7 +4,7 @@
       lang="en"
 >
 <body><div layout:fragment="content">
-    <form method="post" th:object="${invention}">
+    <form method="post" th:action="@{/inventions/delete/{id}(id=${inventionId})}" th:object="${invention}">
         <input hidden="hidden" readonly th:field="*{id}">
         <div>
             <label>Name</label>

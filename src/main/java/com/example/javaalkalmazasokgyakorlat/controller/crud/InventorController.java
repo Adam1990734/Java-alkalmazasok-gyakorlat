@@ -1,5 +1,6 @@
 package com.example.javaalkalmazasokgyakorlat.controller.crud;
 
+import com.example.javaalkalmazasokgyakorlat.model.invention.InventionShortDto;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorDto;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorResponseDto;
 import com.example.javaalkalmazasokgyakorlat.service.InventionService;
@@ -7,9 +8,13 @@ import com.example.javaalkalmazasokgyakorlat.service.InventorService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/inventors")
@@ -44,7 +49,7 @@ public class InventorController {
     @GetMapping("/create")
     public String createForm(Model model) {
         model.addAttribute("inventor", new InventorDto());
-        model.addAttribute("inventions", this.inventorService.findAllGetAsMinimal(0, 20));
+        model.addAttribute("otherInventions", this.inventionService.findAllGetAsMinimal(0, 20));
         return "InventorView/create";
     }
     @PostMapping("/create")
@@ -55,11 +60,14 @@ public class InventorController {
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable Long id, Model model) {
         InventorResponseDto inventor = inventorService.findById(id);
-        model.addAttribute("inventor", inventor);
-        model.addAttribute("inventions", this.inventorService.findAllGetAsMinimal(0, 19));
+        model.addAttribute("inventorId", inventor.getId());
+        model.addAttribute("inventor", inventorService.toSimpDto(inventor));
+
+        model.addAttribute("connectedInventions", inventor.getInventions());
+        model.addAttribute("otherInventions", this.inventionService.findAllGetAsMinimal(0, 20));
         return "InventorView/update";
     }
-    @PutMapping("/update/{id}")
+    @PostMapping("/update/{id}")
     public String update(@PathVariable Long id, @Valid @ModelAttribute InventorDto dto) {
         InventorResponseDto updated = inventorService.update(id, dto);
         return "redirect:/inventors";
@@ -67,10 +75,11 @@ public class InventorController {
     @GetMapping("/delete/{id}")
     public String deleteForm(@PathVariable Long id, Model model) {
         InventorResponseDto inventor = inventorService.findById(id);
-        model.addAttribute("inventor", inventor);
+        model.addAttribute("inventorId", inventor.getId());
+        model.addAttribute("inventor", inventorService.toSimpDto(inventor));
         return "InventorView/delete";
     }
-    @DeleteMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         inventorService.delete(id);
         return "redirect:/inventors";

@@ -47,7 +47,7 @@ public class InventorServiceImp implements InventorService {
         if (dto.getDiedat() != null) {
             inventor.setDiedat(dto.getDiedat());
         }
-        for(var invention : this.inventionRepository.findAllById(dto.getInventionIds()))
+        for(var invention : this.inventionRepository.findAllById(dto.getInventions()))
             inventor.addInvention(invention);
         return toDto(repository.save(inventor));
     }
@@ -64,7 +64,7 @@ public class InventorServiceImp implements InventorService {
         if (dto.getDiedat() != null) {
             inventor.setDiedat(dto.getDiedat());
         }
-        for(var invention : this.inventionRepository.findAllById(dto.getInventionIds()))
+        for(var invention : this.inventionRepository.findAllById(dto.getInventions()))
             inventor.addInvention(invention);
         return toDto(repository.save(inventor));
     }
@@ -127,6 +127,15 @@ public class InventorServiceImp implements InventorService {
         InventorShortDto dto = new InventorShortDto();
         dto.setId(inventor.getId());
         dto.setName(inventor.getName());
+        return dto;
+    }
+    @Override
+    public InventorDto toSimpDto(InventorResponseDto inventor) {
+        var dto = new InventorDto();
+        dto.setName(inventor.getName());
+        dto.setBornat(inventor.getBornat());
+        dto.setDiedat(inventor.getDiedat());
+        dto.setInventions(inventor.getInventions().stream().mapToLong(InventionShortDto::getId).boxed().collect(Collectors.toSet()));
         return dto;
     }
 }
