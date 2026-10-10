@@ -1,7 +1,6 @@
 package com.example.javaalkalmazasokgyakorlat.controller.restcrud;
 
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionDto;
-import com.example.javaalkalmazasokgyakorlat.model.invention.InventionOutDto;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionResponseDto;
 import com.example.javaalkalmazasokgyakorlat.service.InventionService;
 import org.springframework.http.HttpStatus;

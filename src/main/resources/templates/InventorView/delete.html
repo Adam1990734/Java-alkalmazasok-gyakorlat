@@ -4,6 +4,22 @@
       lang="en"
 >
 <body><div layout:fragment="content">
-
+    <form method="post" th:object="${inventor}">
+        <input hidden="hidden" readonly th:field="*{id}">
+        <div>
+            <label>Name</label>
+            <input th:field="*{name}">
+        </div>
+        <div>
+            <label>Born In</label>
+            <input th:field="*{bornat}">
+        </div>
+        <div>
+            <label>Died In</label>
+            <input th:field="*{diedat}">
+        </div>
+        <button type="submit">Save</button>
+    </form>
+    <a th:href="@{/inventors}">Back</a>
 </div></body>
 </html>

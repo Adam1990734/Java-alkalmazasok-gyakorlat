@@ -14,9 +14,9 @@
         </thead>
         <tbody>
         <tr th:each="inventor : ${inventors}">
-            <td th:value="${inventor.name}"></td>
-            <td th:value="${inventor.bornat}"></td>
-            <td th:value="${inventor.diedat}"></td>
+            <td th:text="${inventor.name}"></td>
+            <td th:text="${inventor.bornat}"></td>
+            <td th:text="${inventor.diedat}"></td>
             <td>
                 <ul th:if="${inventor.getInventions().size() > 0}">
                     <li th:each="invention : ${inventor.getInventions()}" th:text="${invention.name}"></li>
@@ -26,5 +26,6 @@
         </tr>
         </tbody>
     </table>
+    <a th:href="@{/inventors}">Back</a>
 </div></body>
 </html>

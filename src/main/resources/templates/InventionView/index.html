@@ -13,7 +13,7 @@
         </thead>
         <tbody>
             <tr th:each="invention : ${inventions}">
-                <td th:value="${invention.name}"></td>
+                <td th:text="${invention.name}"></td>
                 <td>
                     <ul th:if="${invention.getInventors().size() > 0}">
                         <li th:each="inventor : ${invention.getInventors()}" th:text="${inventor.name}"></li>

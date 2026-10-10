@@ -12,10 +12,17 @@
         </div>
         <div>
             <label>Inventors</label>
-            <input type="checkbox" checked th:each="inventor : ${invention.getInventors()}" th:value="${inventor.id}" th:text="${inventor.name}">
-            <input type="checkbox" th:each="inventor : ${inventors}" th:value="${inventor.id}" th:text="${inventor.name}">
+            <th:block th:each="inventor : ${invention.getInventors()}">
+                <input type="checkbox" checked th:value="${inventor.id}" th:text="${inventor.name}">
+                <br>
+            </th:block>
+            <th:block th:each="inventor : ${inventors}">
+                <input type="checkbox" th:value="${inventor.id}" th:text="${inventor.name}">
+                <br>
+            </th:block>
         </div>
         <button type="submit">Add</button>
     </form>
+    <a th:href="@{/inventions}">Back</a>
 </div></body>
 </html>

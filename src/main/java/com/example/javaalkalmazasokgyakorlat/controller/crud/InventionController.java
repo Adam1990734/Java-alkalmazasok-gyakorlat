@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/invention")
+@RequestMapping("/inventions")
 public class InventionController {
     private final InventionService inventionService;
     private final InventorService inventorService;
@@ -51,7 +51,7 @@ public class InventionController {
     @PostMapping("/create")
     public String create(@Valid @ModelAttribute InventionDto dto) {
         InventionResponseDto created = inventionService.create(dto);
-        return "redirect:/invention";
+        return "redirect:/inventions";
     }
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable Long id, Model model) {
@@ -63,7 +63,7 @@ public class InventionController {
     @PutMapping("/update/{id}")
     public String update(@PathVariable Long id, @Valid @ModelAttribute InventionDto dto) {
         InventionResponseDto updated = inventionService.update(id, dto);
-        return "redirect:/invention";
+        return "redirect:/inventions";
     }
     @GetMapping("/delete/{id}")
     public String deleteForm(@PathVariable Long id, Model model) {
@@ -74,6 +74,6 @@ public class InventionController {
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         inventionService.delete(id);
-        return "redirect:/invention";
+        return "redirect:/inventions";
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/inventor")
+@RequestMapping("/inventors")
 public class InventorController {
     private final InventorService inventorService;
     private final InventionService inventionService;
@@ -50,7 +50,7 @@ public class InventorController {
     @PostMapping("/create")
     public String create(@Valid @ModelAttribute InventorDto dto) {
         InventorResponseDto created = inventorService.create(dto);
-        return "redirect:/inventor";
+        return "redirect:/inventors";
     }
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable Long id, Model model) {
@@ -62,7 +62,7 @@ public class InventorController {
     @PutMapping("/update/{id}")
     public String update(@PathVariable Long id, @Valid @ModelAttribute InventorDto dto) {
         InventorResponseDto updated = inventorService.update(id, dto);
-        return "redirect:/inventor";
+        return "redirect:/inventors";
     }
     @GetMapping("/delete/{id}")
     public String deleteForm(@PathVariable Long id, Model model) {
@@ -73,6 +73,6 @@ public class InventorController {
     @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         inventorService.delete(id);
-        return "redirect:/inventor";
+        return "redirect:/inventors";
     }
 }
