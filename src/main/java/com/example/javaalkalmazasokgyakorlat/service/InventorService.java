@@ -22,4 +22,6 @@ public interface InventorService {
 
     List<InventorCountDto> getInventorNameWithCountOfInventions();
     List<InventorTimeLineDto> getInventorTimeLineStats();
+
+    Boolean existById(Long Id);
 }

@@ -18,4 +18,6 @@ public interface InventionService {
     Long countAll();
 
     InventionDto toSimpDto(InventionResponseDto invention);
+
+    Boolean existById(Long Id);
 }

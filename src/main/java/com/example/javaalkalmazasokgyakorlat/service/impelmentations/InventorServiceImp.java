@@ -142,4 +142,7 @@ public class InventorServiceImp implements InventorService {
     }
     @Override
     public List<InventorTimeLineDto> getInventorTimeLineStats() { return  repository.getTimeLineData(); }
+
+    @Override
+    public Boolean existById(Long Id) { return repository.existsById(Id); }
 }

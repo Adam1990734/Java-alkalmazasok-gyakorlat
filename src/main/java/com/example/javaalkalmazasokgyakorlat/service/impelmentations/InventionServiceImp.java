@@ -111,4 +111,7 @@ public class InventionServiceImp implements InventionService {
         dto.setName(invention.getName());
         return dto;
     }
+
+    @Override
+    public Boolean existById(Long Id) { return repository.existsById(Id); }
 }

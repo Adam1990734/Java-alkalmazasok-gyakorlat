@@ -23,6 +23,8 @@ public class InventorRestController {
     }
     @GetMapping("/{id}")
     public ResponseEntity<InventorResponseDto> findById(@PathVariable Long id) {
+        if(!inventorService.existById(id))
+            return ResponseEntity.notFound().build();
         InventorResponseDto inventor = inventorService.findById(id);
         return ResponseEntity.ok(inventor);
     }
@@ -34,11 +36,15 @@ public class InventorRestController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<InventorResponseDto> update(@PathVariable Long id, @RequestBody InventorDto dto) {
+        if(!inventorService.existById(id))
+            return ResponseEntity.notFound().build();
         InventorResponseDto updated = inventorService.update(id, dto);
         return ResponseEntity.ok(updated);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
+        if(!inventorService.existById(id))
+            return ResponseEntity.notFound().build();
         inventorService.delete(id);
         return ResponseEntity.noContent().build();
     }
