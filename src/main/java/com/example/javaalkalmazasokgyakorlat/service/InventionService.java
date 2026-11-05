@@ -1,7 +1,6 @@
 package com.example.javaalkalmazasokgyakorlat.service;
 
 import com.example.javaalkalmazasokgyakorlat.model.invention.*;
-import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorResponseDto;
 
 import java.util.List;
 
@@ -11,13 +10,13 @@ public interface InventionService {
     List<InventionShortDto> findAllGetAsMinimal();
     List<InventionShortDto> findAllGetAsMinimal(int page, int size);
     InventionResponseDto findById(Long id);
-    InventionResponseDto create(InventionDto dto);
-    InventionResponseDto update(Long id, InventionDto dto);
+    InventionResponseDto create(InventionRequestDto dto);
+    InventionResponseDto update(Long id, InventionRequestDto dto);
     void delete(Long id);
 
     Long countAll();
 
-    InventionDto toSimpDto(InventionResponseDto invention);
+    InventionRequestDto toSimpDto(InventionResponseDto invention);
 
     Boolean existById(Long Id);
 }

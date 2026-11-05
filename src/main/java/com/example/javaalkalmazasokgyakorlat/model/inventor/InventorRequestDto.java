@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 
 import java.util.Set;
 
-public class InventorDto {
+public class InventorRequestDto {
     @NotBlank
     @Size(max = 40)
     private String name;

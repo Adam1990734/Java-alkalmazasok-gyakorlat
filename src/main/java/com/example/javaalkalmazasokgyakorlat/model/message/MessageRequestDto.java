@@ -1,18 +1,17 @@
 package com.example.javaalkalmazasokgyakorlat.model.message;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class MessageDto {
+public class MessageRequestDto {
     @NotBlank
     @Size(max = 500)
     private String content;
 
     private Long userId;
 
-    public MessageDto() {}
-    public MessageDto(String content, Long userId) {
+    public MessageRequestDto() {}
+    public MessageRequestDto(String content, Long userId) {
         this.content = content;
         this.userId = userId;
     }

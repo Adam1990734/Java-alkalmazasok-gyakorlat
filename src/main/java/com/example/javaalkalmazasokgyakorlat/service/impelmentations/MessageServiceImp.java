@@ -1,7 +1,7 @@
 package com.example.javaalkalmazasokgyakorlat.service.impelmentations;
 
 import com.example.javaalkalmazasokgyakorlat.model.message.Message;
-import com.example.javaalkalmazasokgyakorlat.model.message.MessageDto;
+import com.example.javaalkalmazasokgyakorlat.model.message.MessageRequestDto;
 import com.example.javaalkalmazasokgyakorlat.model.message.MessageResponseDto;
 import com.example.javaalkalmazasokgyakorlat.repository.MessageRepository;
 import com.example.javaalkalmazasokgyakorlat.service.MessageService;
@@ -36,7 +36,7 @@ public class MessageServiceImp implements MessageService {
         return toDto(message);
     }
     @Override
-    public MessageResponseDto create(MessageDto dto) {
+    public MessageResponseDto create(MessageRequestDto dto) {
         Message message = new Message();
         message.setContent(dto.getContent());
         message.setCreatedAt(LocalDateTime.now());

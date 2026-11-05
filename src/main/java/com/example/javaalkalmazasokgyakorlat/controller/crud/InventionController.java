@@ -1,6 +1,6 @@
 package com.example.javaalkalmazasokgyakorlat.controller.crud;
 
-import com.example.javaalkalmazasokgyakorlat.model.invention.InventionDto;
+import com.example.javaalkalmazasokgyakorlat.model.invention.InventionRequestDto;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionResponseDto;
 import com.example.javaalkalmazasokgyakorlat.service.InventionService;
 import com.example.javaalkalmazasokgyakorlat.service.InventorService;
@@ -45,12 +45,12 @@ public class InventionController {
     }
     @GetMapping("/create")
     public String createForm(Model model) {
-        model.addAttribute("invention", new InventionDto());
+        model.addAttribute("invention", new InventionRequestDto());
         model.addAttribute("inventors", this.inventorService.findAllGetAsMinimal(0, 20));
         return "InventionView/create";
     }
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute InventionDto dto) {
+    public String create(@Valid @ModelAttribute InventionRequestDto dto) {
         InventionResponseDto created = inventionService.create(dto);
         return "redirect:/inventions";
     }
@@ -65,7 +65,7 @@ public class InventionController {
         return "InventionView/update";
     }
     @PostMapping("/update/{id}")
-    public String update(@PathVariable Long id, @Valid @ModelAttribute InventionDto dto) {
+    public String update(@PathVariable Long id, @Valid @ModelAttribute InventionRequestDto dto) {
         InventionResponseDto updated = inventionService.update(id, dto);
         return "redirect:/inventions";
     }

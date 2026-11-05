@@ -37,7 +37,7 @@ public class InventorServiceImp implements InventorService {
     }
 
     @Override
-    public InventorResponseDto create(InventorDto dto) {
+    public InventorResponseDto create(InventorRequestDto dto) {
         Inventor inventor = new Inventor();
         inventor.setName(dto.getName());
         inventor.setBornat(dto.getBornat());
@@ -52,7 +52,7 @@ public class InventorServiceImp implements InventorService {
     @Override
     public InventorResponseDto update(
             Long id,
-            InventorDto dto) {
+            InventorRequestDto dto) {
         Inventor inventor = repository.findById(id)
                 .orElseThrow(() ->
                         new RuntimeException("Inventor not found"));
@@ -127,8 +127,8 @@ public class InventorServiceImp implements InventorService {
         return dto;
     }
     @Override
-    public InventorDto toSimpDto(InventorResponseDto inventor) {
-        var dto = new InventorDto();
+    public InventorRequestDto toSimpDto(InventorResponseDto inventor) {
+        var dto = new InventorRequestDto();
         dto.setName(inventor.getName());
         dto.setBornat(inventor.getBornat());
         dto.setDiedat(inventor.getDiedat());

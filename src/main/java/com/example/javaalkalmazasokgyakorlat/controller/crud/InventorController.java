@@ -1,20 +1,15 @@
 package com.example.javaalkalmazasokgyakorlat.controller.crud;
 
-import com.example.javaalkalmazasokgyakorlat.model.invention.InventionShortDto;
-import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorDto;
+import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorRequestDto;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorResponseDto;
 import com.example.javaalkalmazasokgyakorlat.service.InventionService;
 import com.example.javaalkalmazasokgyakorlat.service.InventorService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/inventors")
@@ -50,12 +45,12 @@ public class InventorController {
     }
     @GetMapping("/create")
     public String createForm(Model model) {
-        model.addAttribute("inventor", new InventorDto());
+        model.addAttribute("inventor", new InventorRequestDto());
         model.addAttribute("otherInventions", this.inventionService.findAllGetAsMinimal(0, 20));
         return "InventorView/create";
     }
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute InventorDto dto) {
+    public String create(@Valid @ModelAttribute InventorRequestDto dto) {
         InventorResponseDto created = inventorService.create(dto);
         return "redirect:/inventors";
     }
@@ -70,7 +65,7 @@ public class InventorController {
         return "InventorView/update";
     }
     @PostMapping("/update/{id}")
-    public String update(@PathVariable Long id, @Valid @ModelAttribute InventorDto dto) {
+    public String update(@PathVariable Long id, @Valid @ModelAttribute InventorRequestDto dto) {
         InventorResponseDto updated = inventorService.update(id, dto);
         return "redirect:/inventors";
     }

@@ -1,12 +1,9 @@
 package com.example.javaalkalmazasokgyakorlat.model.invention;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
-import java.util.Set;
-
-public class InventionDto {
+public class InventionRequestDto {
     @NotBlank
     @Size(max = 80)
     private String name;

@@ -4,7 +4,6 @@ import com.example.javaalkalmazasokgyakorlat.model.inventor.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public interface InventorService {
@@ -13,12 +12,12 @@ public interface InventorService {
     List<InventorShortDto> findAllGetAsMinimal();
     List<InventorShortDto> findAllGetAsMinimal(int page, int size);
     InventorResponseDto findById(Long id);
-    InventorResponseDto create(InventorDto dto);
-    InventorResponseDto update(Long id, InventorDto dto);
+    InventorResponseDto create(InventorRequestDto dto);
+    InventorResponseDto update(Long id, InventorRequestDto dto);
     void delete(Long id);
 
     Long countAll();
-    InventorDto toSimpDto(InventorResponseDto inventor);
+    InventorRequestDto toSimpDto(InventorResponseDto inventor);
 
     List<InventorCountDto> getInventorNameWithCountOfInventions();
     List<InventorTimeLineDto> getInventorTimeLineStats();

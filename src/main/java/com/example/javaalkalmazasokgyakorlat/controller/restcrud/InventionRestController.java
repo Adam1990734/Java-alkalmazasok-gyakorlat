@@ -1,6 +1,6 @@
 package com.example.javaalkalmazasokgyakorlat.controller.restcrud;
 
-import com.example.javaalkalmazasokgyakorlat.model.invention.InventionDto;
+import com.example.javaalkalmazasokgyakorlat.model.invention.InventionRequestDto;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionResponseDto;
 import com.example.javaalkalmazasokgyakorlat.service.InventionService;
 import org.springframework.http.HttpStatus;
@@ -29,13 +29,13 @@ public class InventionRestController {
         return ResponseEntity.ok(invention);
     }
     @PostMapping
-    public ResponseEntity<InventionResponseDto> create(@RequestBody InventionDto dto) {
+    public ResponseEntity<InventionResponseDto> create(@RequestBody InventionRequestDto dto) {
         InventionResponseDto created = inventionService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(created);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<InventionResponseDto> update(@PathVariable Long id, @RequestBody InventionDto dto) {
+    public ResponseEntity<InventionResponseDto> update(@PathVariable Long id, @RequestBody InventionRequestDto dto) {
         if(!inventionService.existById(id))
             return ResponseEntity.notFound().build();
         InventionResponseDto updated = inventionService.update(id, dto);

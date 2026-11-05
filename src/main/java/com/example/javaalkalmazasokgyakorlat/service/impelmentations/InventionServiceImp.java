@@ -1,13 +1,11 @@
 package com.example.javaalkalmazasokgyakorlat.service.impelmentations;
 
 import com.example.javaalkalmazasokgyakorlat.model.invention.Invention;
-import com.example.javaalkalmazasokgyakorlat.model.invention.InventionDto;
+import com.example.javaalkalmazasokgyakorlat.model.invention.InventionRequestDto;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionResponseDto;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionShortDto;
-import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorResponseDto;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorShortDto;
 import com.example.javaalkalmazasokgyakorlat.repository.InventionRepository;
-import com.example.javaalkalmazasokgyakorlat.repository.InventorRepository;
 import com.example.javaalkalmazasokgyakorlat.service.InventionService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -35,13 +33,13 @@ public class InventionServiceImp implements InventionService {
         return toDto(invention);
     }
     @Override
-    public InventionResponseDto create(InventionDto dto) {
+    public InventionResponseDto create(InventionRequestDto dto) {
         Invention invention = new Invention();
         invention.setName(dto.getName());
         return toDto(repository.save(invention));
     }
     @Override
-    public InventionResponseDto update(Long id, InventionDto dto) {
+    public InventionResponseDto update(Long id, InventionRequestDto dto) {
         Invention invention = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Invention not found"));
         invention.setName(dto.getName());
@@ -106,8 +104,8 @@ public class InventionServiceImp implements InventionService {
         return dto;
     }
     @Override
-    public InventionDto toSimpDto(InventionResponseDto invention) {
-        var dto = new InventionDto();
+    public InventionRequestDto toSimpDto(InventionResponseDto invention) {
+        var dto = new InventionRequestDto();
         dto.setName(invention.getName());
         return dto;
     }
