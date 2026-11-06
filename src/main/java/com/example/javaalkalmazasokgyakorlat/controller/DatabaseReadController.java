@@ -18,27 +18,7 @@ public class DatabaseReadController {
         this.inventorService = inventorService;
         this.inventionService = inventionService;
     }
-    //Default-on az index oldal de terveim szerinta form get-el választ:
-    @GetMapping
-    public String index(
-            @RequestParam(name = "chosen", defaultValue = "None", required = false) String chosen,
-            Model model
-    ) {
-        model.addAttribute("chosen", chosen);
-        model.addAttribute("availableTables", new String[]{
-                "Inventor",
-                "Invention",
-                "All",
-                "Diagrams"
-        });
-        switch (chosen) {
-            case "Inventor": return "redirect:/show/inventors";
-            case "Invention": return "redirect:/show/inventions";
-            case "All": return "redirect:/show/all";
-            case "Diagrams": return "redirect:/show/analyse";
-            default: return "DatabaseReadView/index";
-        }
-    }
+
     @GetMapping("/inventors")
     public String viewInventors(
             @RequestParam(name = "page", defaultValue = "0", required = false) int page,
@@ -52,6 +32,7 @@ public class DatabaseReadController {
         model.addAttribute("lastpage", page);
         model.addAttribute("allcount", inventorService.countAll());
         model.addAttribute("datasize", inventors.size());
+        model.addAttribute("hasOperations", false);
         return "DatabaseReadView/inventor";
     }
     @GetMapping("/inventions")
@@ -67,6 +48,7 @@ public class DatabaseReadController {
         model.addAttribute("lastpage", page);
         model.addAttribute("allcount", inventionService.countAll());
         model.addAttribute("datasize", inventions.size());
+        model.addAttribute("hasOperations", false);
         return "DatabaseReadView/invention";
     }
     @GetMapping("/all")
@@ -82,12 +64,7 @@ public class DatabaseReadController {
         model.addAttribute("lastpage", page);
         model.addAttribute("allcount", inventorService.countAll());
         model.addAttribute("datasize", all.size());
+        model.addAttribute("hasOperations", false);
         return "DatabaseReadView/all";
-    }
-    @GetMapping("/analyse")
-    public String viewDiagrams(Model model) {
-        model.addAttribute("inventorStats", inventorService.getInventorNameWithCountOfInventions());
-        model.addAttribute("timelineData", inventorService.getInventorTimeLineStats());
-        return "DatabaseReadView/analyse";
     }
 }

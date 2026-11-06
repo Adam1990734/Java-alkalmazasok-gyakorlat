@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{Shared/mainlayout}"
+      lang="en"
+><body><div layout:fragment="content">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div>
+        <h2>Bar Diagram</h2>
+        <canvas id="barDiagram"></canvas>
+    </div>
+    <script th:replace="~{DiagramView/diagrams :: barDiagram}"></script>
+</div></body></html>

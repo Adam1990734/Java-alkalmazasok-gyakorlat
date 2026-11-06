@@ -4,26 +4,25 @@
       lang="en"
 >
 <body><div layout:fragment="content">
-    <a th:href="@{/inventions/create}">Create new invention</a>
+    <a th:href="@{/crud/inventions/create}">Create new invention</a>
     <table th:fragment="inventionDisplayer">
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Operations</th>
+                <th th:if="${hasOperations}">Operations</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="invention : ${inventions}">
                 <td th:text="${invention.name}"></td>
-                <td>
-                    <a th:href="@{/inventions/details/{id}(id=${invention.id})}">Details</a>
-                    <a th:href="@{/inventions/update/{id}(id=${invention.id})}">Edit</a>
-                    <a th:href="@{/inventions/delete/{id}(id=${invention.id})}">Remove</a>
+                <td th:if="${hasOperations}">
+                    <a th:href="@{/crud/inventions/details/{id}(id=${invention.id})}">Details</a>
+                    <a th:href="@{/crud/inventions/update/{id}(id=${invention.id})}">Edit</a>
+                    <a th:href="@{/crud/inventions/delete/{id}(id=${invention.id})}">Remove</a>
                 </td>
             </tr>
         </tbody>
     </table>
     <div th:replace="~{Shared/pager :: pager}"></div>
-    <a th:href="@{/inventions}">Back</a>
 </div></body>
 </html>

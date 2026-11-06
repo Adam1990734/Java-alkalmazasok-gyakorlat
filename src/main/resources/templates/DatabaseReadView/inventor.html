@@ -4,22 +4,7 @@
       lang="en"
 >
 <body><div layout:fragment="content">
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Born date</th>
-                <th>Died date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="inventor : ${inventors}">
-                <td th:text="${inventor.name}"></td>
-                <td th:text="${inventor.bornat}"></td>
-                <td th:text="${inventor.diedat}"></td>
-            </tr>
-        </tbody>
-    </table>
+    <div th:replace="~{InventorView/index :: inventorDisplayer}"></div>
     <div th:replace="~{Shared/pager :: pager}"></div>
     <a th:href="@{/}"></a>
 </div></body>

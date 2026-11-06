@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/inventors")
+@RequestMapping("/crud/inventors")
 public class InventorController {
     private final InventorService inventorService;
     private final InventionService inventionService;
@@ -35,6 +35,7 @@ public class InventorController {
         model.addAttribute("lastpage", page);
         model.addAttribute("allcount", inventorService.countAll());
         model.addAttribute("datasize", inventors.size());
+        model.addAttribute("hasOperations", true);
         return "InventorView/index";
     }
     @GetMapping("/details/{id}")

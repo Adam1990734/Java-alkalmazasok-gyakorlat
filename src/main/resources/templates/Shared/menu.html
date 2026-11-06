@@ -20,11 +20,23 @@
         </span>
         <span>
             <!-- Ez még nincs kész -->
-            | <a th:href="@{/show}">Database and Diagram</a>
+            | <ul>
+                <li><a th:href="@{/show/inventors}">inventors</a></li>
+                <li><a th:href="@{/show/inventions}">inventions</a></li>
+              </ul>
+        </span>
+        <span>
+            | <ul>
+                <li><a th:href="@{/diagrams/withcount}">withcounts</a></li>
+                <li><a th:href="@{/diagrams/timeline}">timeline</a></li>
+              </ul>
         </span>
         <span sec:authorize="hasRole('ADMIN')">
             <!-- Ez az adminnak van (nincs még kész) -->
-            | <a th:href="@{/crud}">CRUD</a>
+            | <ul>
+                <li><a th:href="@{/crud/inventors}">inventors</a></li>
+                <li><a th:href="@{/crud/inventions}">inventions</a></li>
+              </ul>
         </span>
         <span sec:authorize="isAnonymous()">
             | <a th:href="@{/register}">Register</a>
