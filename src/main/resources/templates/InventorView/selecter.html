@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+>
+<div th:fragment="selecter">
+    <input type="text" id="searcher"/>
+    <div id="suggestions"></div>
+    <h4>Selected inventions</h4>
+    <script th:if="${isUpdate}" th:inline="javascript">
+        let selectedInventions = [[${connectedInventions}]];
+    </script>
+    <script th:if="${!isUpdate}">
+        let selectedInventions = []
+    </script>
+    <div id="selected-inventions"></div>
+    <script src="/js/inventionSelector.js"></script>
+</div>
+</html>

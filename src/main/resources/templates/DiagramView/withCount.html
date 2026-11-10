@@ -8,5 +8,23 @@
         <h2>Bar Diagram</h2>
         <canvas id="barDiagram"></canvas>
     </div>
-    <script th:replace="~{DiagramView/diagrams :: barDiagram}"></script>
+    <script th:fragment="barDiagram" th:inline="javascript">
+        const inventors = [[${inventorStats.![name]}]];
+        const counts = [[${inventorStats.![count]}]];
+
+        new Chart(
+            document.getElementById('barDiagram'),
+            {
+                type: 'bar',
+                data: {
+                    labels: inventors,
+                    datasets: [{
+                        label: 'Találmányok száma',
+                        data: counts,
+                        backgroundColor: '#36A2EB'
+                    }]
+                }
+            }
+        );
+    </script>
 </div></body></html>

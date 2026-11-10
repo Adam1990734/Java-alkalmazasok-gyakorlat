@@ -15,11 +15,9 @@ import java.util.List;
 @RequestMapping("/crud/inventors")
 public class InventorController {
     private final InventorService inventorService;
-    private final InventionService inventionService;
 
-    public InventorController(InventorService inventorService, InventionService inventionService) {
+    public InventorController(InventorService inventorService) {
         this.inventorService = inventorService;
-        this.inventionService = inventionService;
     }
 
     @GetMapping
@@ -47,13 +45,13 @@ public class InventorController {
     @GetMapping("/create")
     public String createForm(Model model) {
         model.addAttribute("inventor", new InventorRequestDto());
-        model.addAttribute("otherInventions", this.inventionService.findAllGetAsMinimal(0, 20));
+        model.addAttribute("isUpdate", false);
         return "InventorView/create";
     }
     @PostMapping("/create")
     public String create(@Valid @ModelAttribute InventorRequestDto dto) {
         InventorResponseDto created = inventorService.create(dto);
-        return "redirect:/inventors";
+        return "redirect:/crud/inventors";
     }
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable Long id, Model model) {
@@ -62,13 +60,13 @@ public class InventorController {
         model.addAttribute("inventor", inventorService.toSimpDto(inventor));
 
         model.addAttribute("connectedInventions", inventor.getInventions());
-        model.addAttribute("otherInventions", this.inventionService.findAllGetAsMinimal(0, 20));
+        model.addAttribute("isUpdate", true);
         return "InventorView/update";
     }
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public String update(@PathVariable Long id, @Valid @ModelAttribute InventorRequestDto dto) {
         InventorResponseDto updated = inventorService.update(id, dto);
-        return "redirect:/inventors";
+        return "redirect:/crud/inventors";
     }
     @GetMapping("/delete/{id}")
     public String deleteForm(@PathVariable Long id, Model model) {
@@ -77,9 +75,9 @@ public class InventorController {
         model.addAttribute("inventor", inventorService.toSimpDto(inventor));
         return "InventorView/delete";
     }
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         inventorService.delete(id);
-        return "redirect:/inventors";
+        return "redirect:/crud/inventors";
     }
 }

@@ -8,5 +8,38 @@
         <h2>Timeline Diagram</h2>
         <canvas id="timelineDiagram"></canvas>
     </div>
-    <script th:replace="~{DiagramView/diagrams :: timelineDiagram}"></script>
+    <script th:fragment="timelineDiagram" th:inline="javascript">
+        const timeline = [[${timelineData}]];
+        const currentYear = new Date().getFullYear();
+        new Chart(
+            document.getElementById('timelineDiagram'),
+            {
+                type: 'bar',
+                data: {
+                    labels: timeline.map(x => x.name),
+                    datasets: [{
+                        label: 'Életévek',
+                        data: timeline.map(x => [
+                            Number(x.birthYear),
+                            Number(x.deathYear) === 0 ? currentYear : Number(x.deathYear)
+                        ]),
+                        backgroundColor: '#4BC0C0'
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            min: 1700,
+                            max: currentYear,
+                            title: {
+                                display: true,
+                                text: 'Év'
+                            }
+                        }
+                    }
+                }
+            }
+        );
+    </script>
 </div></body></html>

@@ -53,7 +53,7 @@ public class InventionController {
     @PostMapping("/create")
     public String create(@Valid @ModelAttribute InventionRequestDto dto) {
         InventionResponseDto created = inventionService.create(dto);
-        return "redirect:/inventions";
+        return "redirect:/crud/inventions";
     }
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable Long id, Model model) {
@@ -65,10 +65,10 @@ public class InventionController {
         model.addAttribute("otherInventors", this.inventorService.findAllGetAsMinimal(0, 20));
         return "InventionView/update";
     }
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public String update(@PathVariable Long id, @Valid @ModelAttribute InventionRequestDto dto) {
         InventionResponseDto updated = inventionService.update(id, dto);
-        return "redirect:/inventions";
+        return "redirect:/crud/inventions";
     }
     @GetMapping("/delete/{id}")
     public String deleteForm(@PathVariable Long id, Model model) {
@@ -77,9 +77,9 @@ public class InventionController {
         model.addAttribute("invention", invention);
         return "InventionView/delete";
     }
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         inventionService.delete(id);
-        return "redirect:/inventions";
+        return "redirect:/crud/inventions";
     }
 }

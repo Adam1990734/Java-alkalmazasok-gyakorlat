@@ -18,5 +18,7 @@ public interface InventionService {
 
     InventionRequestDto toSimpDto(InventionResponseDto invention);
 
+    List<InventionShortDto> findSuggestionsByNameAsMinimal(String name, Integer size);
+
     Boolean existById(Long Id);
 }

@@ -2,6 +2,7 @@ package com.example.javaalkalmazasokgyakorlat.controller.restcrud;
 
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionRequestDto;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionResponseDto;
+import com.example.javaalkalmazasokgyakorlat.model.invention.InventionShortDto;
 import com.example.javaalkalmazasokgyakorlat.service.InventionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,5 +48,16 @@ public class InventionRestController {
             return ResponseEntity.notFound().build();
         inventionService.delete(id);
         return ResponseEntity.ok().build();
+    }
+    @GetMapping("/suggest")
+    public ResponseEntity<List<InventionShortDto>> suggestByName(
+            @RequestParam(name = "name", defaultValue = "") String name
+    ) {
+        if(name.isEmpty())
+            return ResponseEntity.ok(
+                    inventionService.findAllGetAsMinimal(0, 10)
+            );
+        var inventors = inventionService.findSuggestionsByNameAsMinimal(name, 10);
+        return ResponseEntity.ok(inventors);
     }
 }

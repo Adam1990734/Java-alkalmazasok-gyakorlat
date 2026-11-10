@@ -4,7 +4,7 @@
       lang="en"
 >
 <body><div layout:fragment="content">
-    <form method="post" th:action="@{/inventors/delete/{id}(id=${inventorId})}" th:object="${inventor}">
+    <form method="post" th:action="@{/crud/inventors/delete/{id}(id=${inventorId})}" th:method="DELETE" th:object="${inventor}">
         <div>
             <label>Name</label>
             <input th:field="*{name}">
