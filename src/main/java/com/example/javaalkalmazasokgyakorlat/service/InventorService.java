@@ -19,8 +19,5 @@ public interface InventorService {
     Long countAll();
     InventorRequestDto toSimpDto(InventorResponseDto inventor);
 
-    List<InventorCountDto> getInventorNameWithCountOfInventions();
-    List<InventorTimeLineDto> getInventorTimeLineStats();
-
     Boolean existById(Long Id);
 }

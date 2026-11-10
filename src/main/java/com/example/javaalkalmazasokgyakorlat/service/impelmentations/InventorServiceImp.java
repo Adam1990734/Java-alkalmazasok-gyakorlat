@@ -8,6 +8,7 @@ import com.example.javaalkalmazasokgyakorlat.service.InventorService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,11 +42,10 @@ public class InventorServiceImp implements InventorService {
         Inventor inventor = new Inventor();
         inventor.setName(dto.getName());
         inventor.setBornat(dto.getBornat());
-        if (dto.getDiedat() != null) {
-            inventor.setDiedat(dto.getDiedat());
-        }
-        for(var invention : this.inventionRepository.findAllById(dto.getInventions()))
-            inventor.addInvention(invention);
+        inventor.setDiedat(dto.getDiedat());
+        inventor.setInventions(new HashSet<>(
+                this.inventionRepository.findAllById(dto.getInventions())
+        ));
         return toDto(repository.save(inventor));
     }
 
@@ -58,11 +58,10 @@ public class InventorServiceImp implements InventorService {
                         new RuntimeException("Inventor not found"));
         inventor.setName(dto.getName());
         inventor.setBornat(dto.getBornat());
-        if (dto.getDiedat() != null) {
-            inventor.setDiedat(dto.getDiedat());
-        }
-        for(var invention : this.inventionRepository.findAllById(dto.getInventions()))
-            inventor.addInvention(invention);
+        inventor.setDiedat(dto.getDiedat());
+        inventor.setInventions(new HashSet<>(
+                this.inventionRepository.findAllById(dto.getInventions())
+        ));
         return toDto(repository.save(inventor));
     }
 
@@ -135,13 +134,6 @@ public class InventorServiceImp implements InventorService {
         dto.setInventions(inventor.getInventions().stream().mapToLong(InventionShortDto::getId).boxed().collect(Collectors.toSet()));
         return dto;
     }
-
-    @Override
-    public List<InventorCountDto> getInventorNameWithCountOfInventions() {
-        return repository.getStatistics();
-    }
-    @Override
-    public List<InventorTimeLineDto> getInventorTimeLineStats() { return  repository.getTimeLineData(); }
 
     @Override
     public Boolean existById(Long Id) { return repository.existsById(Id); }

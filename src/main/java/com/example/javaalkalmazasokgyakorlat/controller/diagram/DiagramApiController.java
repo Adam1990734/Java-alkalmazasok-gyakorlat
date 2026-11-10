@@ -2,7 +2,7 @@ package com.example.javaalkalmazasokgyakorlat.controller.diagram;
 
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorCountDto;
 import com.example.javaalkalmazasokgyakorlat.model.inventor.InventorTimeLineDto;
-import com.example.javaalkalmazasokgyakorlat.service.InventorService;
+import com.example.javaalkalmazasokgyakorlat.service.DiagramService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +13,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/diagrams")
 public class DiagramApiController {
-    private final InventorService inventorService;
+    private final DiagramService inventorService;
 
-    public DiagramApiController(InventorService inventorService) { this.inventorService = inventorService; }
+    public DiagramApiController(DiagramService diagramService) { this.inventorService = diagramService; }
 
     @GetMapping("/withcount")
     public ResponseEntity<List<InventorCountDto>> withCount() {
