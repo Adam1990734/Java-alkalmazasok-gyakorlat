@@ -48,10 +48,10 @@ public class WebSecurityConfig {
                         aut.requestMatchers("/", "/register", "/login",
                                             "/css/**", "/js/**",
                                             "/contact", "/show/**",
-                                            "/diagrams/**"
+                                            "/diagrams/**", "/api/diagrams/**"
                                 ).permitAll()
                                 .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
-                                .requestMatchers("/admin", "/crud", "/inventions/**", "/inventors/**").hasRole("ADMIN")
+                                .requestMatchers("/admin", "/crud", "/api/inventions/**", "/api/inventors/**").hasRole("ADMIN")
                                 .anyRequest()
                                 .authenticated()
                 ).formLogin(form ->

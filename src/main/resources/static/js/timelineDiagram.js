@@ -8,10 +8,10 @@
             data: {
                 labels: timeline.map(x => x.name),
                 datasets: [{
-                    label: 'Életévek',
+                    label: 'Ages',
                     data: timeline.map(x => [
-                        Number(x.bornAt),
-                        Number(x.diedAt) === 0 ? currentYear : Number(x.diedAt)
+                        Number(x.bornat),
+                        Number(x.diedat) === 0 ? currentYear : Number(x.diedat)
                     ]),
                     backgroundColor: '#4BC0C0'
                 }]
@@ -24,7 +24,7 @@
                         max: currentYear,
                         title: {
                             display: true,
-                            text: 'Év'
+                            text: 'Age'
                         }
                     }
                 }
