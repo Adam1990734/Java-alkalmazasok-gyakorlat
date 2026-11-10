@@ -1,9 +1,91 @@
+<!--
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{Shared/mainlayout}"
 	  lang="en"
 >
-<body><div layout:fragment="content">
+<body>
+<div layout:fragment="content">
 	<h1>Home</h1>
-</div></body>
+	<div class="container my-5 text-center">
+		<h1 class="display-4 fw-bold">Üdvözöljük a Webalkalmazásban!</h1>
+		<p class="lead mt-3">
+			Ez a kezdőoldal bemutatja az alkalmazás fő funkcióit és az adatbázis tartalmát.
+		</p>
+	</div>
+</div>
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{Shared/mainlayout}"
+	  lang="hu"
+>
+<body>
+<div layout:fragment="content">
+	<!-- Hero szekció -->
+	<section class="bg-primary bg-gradient text-white py-5 shadow-sm">
+		<div class="container py-4 text-center">
+			<h1 class="display-4 fw-bold mb-3">Feltalálók és Találmányok</h1>
+			<p class="lead mb-4 mx-auto" style="max-width: 700px;">
+				Üdvözöljük a Java Spring Boot alapú webalkalmazásban! Fedezze fel a történelem legjelentősebb feltalálóit, találmányaikat, és böngésszen a hozzájuk tartozó interaktív statisztikák között.
+			</p>
+			<div class="d-flex justify-content-center gap-3 flex-wrap">
+				<a th:href="@{/show/inventors}" class="btn btn-warning btn-lg fw-semibold px-4">
+					<i class="bi bi-people-fill me-2"></i>Feltalálók megtekintése
+				</a>
+				<a th:href="@{/show/inventions}" class="btn btn-outline-light btn-lg px-4">
+					<i class="bi bi-gear-fill me-2"></i>Találmányok böngészése
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Funkciók kártyákban -->
+	<section class="container my-5">
+		<div class="row g-4 text-center">
+			<div class="col-md-4">
+				<div class="card h-100 border-0 shadow-sm p-3">
+					<div class="card-body">
+						<div class="fs-1 text-primary mb-3"><i class="bi bi-database-fill"></i></div>
+						<h5 class="card-title fw-bold">Adatbázis</h5>
+						<p class="card-text text-muted">
+							Tekintse meg a relációs adatbázisban tárolt feltalálók és találmányok részletes adatait.
+						</p>
+						<a th:href="@{/show/inventors}" class="btn btn-sm btn-outline-primary">Ugrás az adatokhoz</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="card h-100 border-0 shadow-sm p-3">
+					<div class="card-body">
+						<div class="fs-1 text-success mb-3"><i class="bi bi-bar-chart-fill"></i></div>
+						<h5 class="card-title fw-bold">Diagramok</h5>
+						<p class="card-text text-muted">
+							Vizuális kimutatások és idővonalak a Chart.js segítségével az adatbázis tartalma alapján.
+						</p>
+						<a th:href="@{/diagrams/timeline}" class="btn btn-sm btn-outline-success">Idővonal megnyitása</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="card h-100 border-0 shadow-sm p-3">
+					<div class="card-body">
+						<div class="fs-1 text-warning mb-3"><i class="bi bi-envelope-fill"></i></div>
+						<h5 class="card-title fw-bold">Kapcsolat</h5>
+						<p class="card-text text-muted">
+							Kérdése vagy észrevétele van? Küldjön üzenetet közvetlenül a rendszeren keresztül.
+						</p>
+						<a th:href="@{/contact}" class="btn btn-sm btn-outline-dark">Üzenet küldése</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+</body>
 </html>
