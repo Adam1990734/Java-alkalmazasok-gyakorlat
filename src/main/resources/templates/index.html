@@ -2,40 +2,40 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{Shared/mainlayout}"
-	  lang="hu"
+	  lang="en"
 >
 <body>
 <div layout:fragment="content">
-	<!-- Hero szekció -->
+	<!-- Hero section -->
 	<section class="bg-primary bg-gradient text-white py-5 shadow-sm">
 		<div class="container py-4 text-center">
-			<h1 class="display-4 fw-bold mb-3">Feltalálók és Találmányok</h1>
+			<h1 class="display-4 fw-bold mb-3">Inventors and Inventions</h1>
 			<p class="lead mb-4 mx-auto" style="max-width: 700px;">
-				Üdvözöljük a Java Spring Boot alapú webalkalmazásban! Fedezze fel a történelem legjelentősebb feltalálóit, találmányaikat, és böngésszen a hozzájuk tartozó interaktív statisztikák között.
+				Welcome to the Java Spring Boot web application! Explore history's most significant inventors, their inventions, and browse through interactive statistics.
 			</p>
 			<div class="d-flex justify-content-center gap-3 flex-wrap">
 				<a th:href="@{/show/inventors}" class="btn btn-warning btn-lg fw-semibold px-4">
-					<i class="bi bi-people-fill me-2"></i>Feltalálók megtekintése
+					<i class="bi bi-people-fill me-2"></i>View Inventors
 				</a>
 				<a th:href="@{/show/inventions}" class="btn btn-outline-light btn-lg px-4">
-					<i class="bi bi-gear-fill me-2"></i>Találmányok böngészése
+					<i class="bi bi-gear-fill me-2"></i>Browse Inventions
 				</a>
 			</div>
 		</div>
 	</section>
 
-	<!-- Funkciók kártyákban -->
+	<!-- Feature cards -->
 	<section class="container my-5">
 		<div class="row g-4 text-center">
 			<div class="col-md-4">
 				<div class="card h-100 border-0 shadow-sm p-3">
 					<div class="card-body">
 						<div class="fs-1 text-primary mb-3"><i class="bi bi-database-fill"></i></div>
-						<h5 class="card-title fw-bold">Adatbázis</h5>
+						<h5 class="card-title fw-bold">Database</h5>
 						<p class="card-text text-muted">
-							Tekintse meg a relációs adatbázisban tárolt feltalálók és találmányok részletes adatait.
+							View detailed information about inventors and inventions stored in our relational database.
 						</p>
-						<a th:href="@{/show/inventors}" class="btn btn-sm btn-outline-primary">Ugrás az adatokhoz</a>
+						<a th:href="@{/show/inventors}" class="btn btn-sm btn-outline-primary">Go to Data</a>
 					</div>
 				</div>
 			</div>
@@ -44,11 +44,11 @@
 				<div class="card h-100 border-0 shadow-sm p-3">
 					<div class="card-body">
 						<div class="fs-1 text-success mb-3"><i class="bi bi-bar-chart-fill"></i></div>
-						<h5 class="card-title fw-bold">Diagramok</h5>
+						<h5 class="card-title fw-bold">Diagrams</h5>
 						<p class="card-text text-muted">
-							Vizuális kimutatások és idővonalak a Chart.js segítségével az adatbázis tartalma alapján.
+							Visual charts and timelines powered by Chart.js based on the database content.
 						</p>
-						<a th:href="@{/diagrams/timeline}" class="btn btn-sm btn-outline-success">Idővonal megnyitása</a>
+						<a th:href="@{/diagrams/timeline}" class="btn btn-sm btn-outline-success">Open Timeline</a>
 					</div>
 				</div>
 			</div>
@@ -57,11 +57,11 @@
 				<div class="card h-100 border-0 shadow-sm p-3">
 					<div class="card-body">
 						<div class="fs-1 text-warning mb-3"><i class="bi bi-envelope-fill"></i></div>
-						<h5 class="card-title fw-bold">Kapcsolat</h5>
+						<h5 class="card-title fw-bold">Contact</h5>
 						<p class="card-text text-muted">
-							Kérdése vagy észrevétele van? Küldjön üzenetet közvetlenül a rendszeren keresztül.
+							Have a question or feedback? Send a message directly through the system.
 						</p>
-						<a th:href="@{/contact}" class="btn btn-sm btn-outline-dark">Üzenet küldése</a>
+						<a th:href="@{/contact}" class="btn btn-sm btn-outline-dark">Send Message</a>
 					</div>
 				</div>
 			</div>

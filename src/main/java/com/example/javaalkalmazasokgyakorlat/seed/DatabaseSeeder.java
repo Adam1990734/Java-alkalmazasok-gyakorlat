@@ -19,12 +19,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class DatabaseSeeder implements CommandLineRunner {
     private final InventorRepository inventorRepository;
     private final InventionRepository inventionRepository;
     private final UserRoleRepository userRoleRepository;
 
+    public DatabaseSeeder(InventorRepository inventorRepository,
+                          InventionRepository inventionRepository,
+                          UserRoleRepository userRoleRepository) {
+        this.inventorRepository = inventorRepository;
+        this.inventionRepository = inventionRepository;
+        this.userRoleRepository = userRoleRepository;
+    }
     private final Map<Long, Inventor> inventors = new HashMap<>();
     private final Map<Long, Invention> inventions = new HashMap<>();
 

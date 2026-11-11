@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="hu">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <body>
 <nav th:fragment="menu" class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
     <div class="container">
         <a class="navbar-brand fw-bold" th:href="@{/}">
-            <i class="bi bi-lightbulb-fill text-warning me-1"></i> Találmányok
+            <i class="bi bi-lightbulb-fill text-warning me-1"></i> Inventions
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Menü megnyitása">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="mainNavbar">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">Főoldal</a>
+                    <a class="nav-link" th:href="@{/}">Home</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
                     <a class="nav-link" th:href="@{/user}">User</a>
@@ -22,47 +22,47 @@
                     <a class="nav-link text-warning" th:href="@{/admin}">Admin</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/contact}">Kapcsolat</a>
+                    <a class="nav-link" th:href="@{/contact}">Contact</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" th:href="@{/message}">Üzenetek</a>
+                    <a class="nav-link" th:href="@{/message}">Messages</a>
                 </li>
 
-                <!-- Adatbázis legördülő -->
+                <!-- Database dropdown -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Adatbázis
+                        Database
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/show/inventors}">Feltalálók (Inventors)</a></li>
-                        <li><a class="dropdown-item" th:href="@{/show/inventions}">Találmányok (Inventions)</a></li>
+                        <li><a class="dropdown-item" th:href="@{/show/inventors}">Inventors</a></li>
+                        <li><a class="dropdown-item" th:href="@{/show/inventions}">Inventions</a></li>
                     </ul>
                 </li>
 
-                <!-- Diagramok legördülő -->
+                <!-- Diagrams dropdown -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Diagramok
+                        Diagrams
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/diagrams/withcount}">Darabszámok (WithCounts)</a></li>
-                        <li><a class="dropdown-item" th:href="@{/diagrams/timeline}">Idővonal (Timeline)</a></li>
+                        <li><a class="dropdown-item" th:href="@{/diagrams/withcount}">With Counts</a></li>
+                        <li><a class="dropdown-item" th:href="@{/diagrams/timeline}">Timeline</a></li>
                     </ul>
                 </li>
 
-                <!-- Admin CRUD legördülő -->
+                <!-- Admin CRUD dropdown -->
                 <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
                     <a class="nav-link dropdown-toggle text-warning" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         CRUD
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/crud/inventors}">Feltalálók kezelése</a></li>
-                        <li><a class="dropdown-item" th:href="@{/crud/inventions}">Találmányok kezelése</a></li>
+                        <li><a class="dropdown-item" th:href="@{/crud/inventors}">Manage Inventors</a></li>
+                        <li><a class="dropdown-item" th:href="@{/crud/inventions}">Manage Inventions</a></li>
                     </ul>
                 </li>
             </ul>
 
-            <!-- Jobb oldali gombok (Login/Register vagy Logout) -->
+            <!-- Right-side auth buttons -->
             <div class="d-flex align-items-center gap-2">
                 <div sec:authorize="isAnonymous()" class="d-flex gap-2">
                     <a class="btn btn-outline-light btn-sm" th:href="@{/login}">Login</a>
