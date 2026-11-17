@@ -8,12 +8,9 @@ public class MessageRequestDto {
     @Size(max = 500)
     private String content;
 
-    private Long userId;
-
     public MessageRequestDto() {}
-    public MessageRequestDto(String content, Long userId) {
+    public MessageRequestDto(String content) {
         this.content = content;
-        this.userId = userId;
     }
 
     public String getContent() {
@@ -21,11 +18,5 @@ public class MessageRequestDto {
     }
     public void setContent(String content) {
         this.content = content;
-    }
-    public Long getUserId() {
-        return userId;
-    }
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 }

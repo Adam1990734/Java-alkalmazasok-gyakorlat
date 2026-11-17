@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -31,7 +32,14 @@ public class ContactController {
         return "MessageView/create";
     }
     @PostMapping
-    public String saveMessage(@Valid @ModelAttribute MessageRequestDto message, @AuthenticationPrincipal UserMoreDetails user, Model model) {
+    public String saveMessage(
+            @Valid @ModelAttribute("message") MessageRequestDto message,
+            BindingResult bindingResult,
+            @AuthenticationPrincipal UserMoreDetails user
+    ) {
+        if(bindingResult.hasErrors())
+            return "MessageView/create";
+
         Message msg = new Message();
         msg.setContent(message.getContent());
         msg.setCreatedAt(LocalDateTime.now());

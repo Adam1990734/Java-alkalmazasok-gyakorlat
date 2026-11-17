@@ -7,7 +7,10 @@
 <body><div layout:fragment="content">
     <form method="post" th:action="@{/contact}" th:object="${message}">
         <div>
-            <label>Adja meg az üzenetet:</label> <br>
+            <label>Write your message here:</label> <br>
+            <div>
+                <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
+            </div>
             <textarea th:field="*{content}"></textarea>
             <button type="submit">Send</button>
         </div>

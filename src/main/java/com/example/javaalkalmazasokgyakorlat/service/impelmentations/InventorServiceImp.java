@@ -60,8 +60,8 @@ public class InventorServiceImp implements InventorService {
         inventor.setBornat(dto.getBornat());
         inventor.setDiedat(dto.getDiedat());
         inventor.setInventions(new HashSet<>(
-                this.inventionRepository.findAllById(dto.getInventions())
-        ));
+            this.inventionRepository.findAllById(dto.getInventions()))
+        );
         return toDto(repository.save(inventor));
     }
 
