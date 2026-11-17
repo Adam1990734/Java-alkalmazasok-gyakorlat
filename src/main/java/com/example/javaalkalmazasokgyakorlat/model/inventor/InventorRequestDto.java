@@ -8,16 +8,15 @@ import jakarta.validation.constraints.Size;
 import java.util.Set;
 
 public class InventorRequestDto {
-    @NotBlank
-    @Size(max = 40)
+    @NotBlank(message = "The name is required!")
+    @Size(max = 40, message = "The name cannot be bigger than 40 characters!")
     private String name;
 
-    @NotNull
+    @NotNull(message = "The born year is required!")
     private Integer bornat;
 
     private Integer diedat;
 
-    @NotEmpty
     private Set<Long> inventions;
 
     public String getName() {

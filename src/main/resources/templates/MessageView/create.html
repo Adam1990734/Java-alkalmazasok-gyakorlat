@@ -8,8 +8,8 @@
     <form method="post" th:action="@{/contact}" th:object="${message}">
         <div>
             <label>Write your message here:</label> <br>
-            <div>
-                <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
+            <div th:if="${#fields.hasErrors('content')}">
+                <span th:errors="*{content}"></span>
             </div>
             <textarea th:field="*{content}"></textarea>
             <button type="submit">Send</button>

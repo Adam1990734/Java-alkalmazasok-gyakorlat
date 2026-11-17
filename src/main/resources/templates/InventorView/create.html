@@ -7,10 +7,16 @@
     <form method="post" th:action="@{/crud/inventors/create}" th:object="${inventor}">
         <div>
             <label>Name</label>
+            <div th:if="${#fields.hasErrors('name')}">
+                <span th:errors="*{name}"></span>
+            </div>
             <input th:field="*{name}">
         </div>
         <div>
             <label>Born In</label>
+            <div th:if="${#fields.hasErrors('bornat')}">
+                <span th:errors="*{bornat}"></span>
+            </div>
             <input th:field="*{bornat}">
         </div>
         <div>

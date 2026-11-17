@@ -7,6 +7,7 @@ import com.example.javaalkalmazasokgyakorlat.service.InventorService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,7 +52,9 @@ public class InventionController {
         return "InventionView/create";
     }
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute InventionRequestDto dto) {
+    public String create(@Valid @ModelAttribute("invention") InventionRequestDto dto, BindingResult bindingResult) {
+        if(bindingResult.hasErrors())
+            return "InventionView/create";
         InventionResponseDto created = inventionService.create(dto);
         return "redirect:/crud/inventions";
     }
@@ -66,7 +69,13 @@ public class InventionController {
         return "InventionView/update";
     }
     @PutMapping("/update/{id}")
-    public String update(@PathVariable Long id, @Valid @ModelAttribute InventionRequestDto dto) {
+    public String update(
+            @PathVariable Long id,
+            @Valid @ModelAttribute("invention") InventionRequestDto dto,
+            BindingResult bindingResult
+    ) {
+        if(bindingResult.hasErrors())
+            return "InventionView/update";
         InventionResponseDto updated = inventionService.update(id, dto);
         return "redirect:/crud/inventions";
     }

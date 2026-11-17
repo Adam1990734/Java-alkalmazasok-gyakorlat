@@ -4,8 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public class InventionRequestDto {
-    @NotBlank
-    @Size(max = 80)
+    @NotBlank(message = "The name is required!")
+    @Size(max = 80, message = "The name cannot be bigger than 80 characters!")
     private String name;
 
     public String getName() {

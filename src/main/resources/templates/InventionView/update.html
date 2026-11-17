@@ -7,6 +7,9 @@
     <form method="post" th:action="@{/crud/inventions/update/{id}(id=${inventionId})}" th:method="PUT" th:object="${invention}">
         <div>
             <label>Name</label>
+            <div th:if="${#fields.hasErrors('name')}">
+                <span th:errors="*{name}"></span>
+            </div>
             <input th:field="*{name}">
         </div>
         <button type="submit">Add</button>
