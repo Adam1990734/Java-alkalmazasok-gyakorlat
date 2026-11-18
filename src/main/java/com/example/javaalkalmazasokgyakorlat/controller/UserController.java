@@ -1,7 +1,6 @@
 package com.example.javaalkalmazasokgyakorlat.controller;
 
 import com.example.javaalkalmazasokgyakorlat.model.user.User;
-import com.example.javaalkalmazasokgyakorlat.model.user.UserRole;
 import com.example.javaalkalmazasokgyakorlat.repository.UserRepository;
 import com.example.javaalkalmazasokgyakorlat.repository.UserRoleRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
