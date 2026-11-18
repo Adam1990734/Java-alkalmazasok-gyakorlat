@@ -43,15 +43,19 @@ public class WebSecurityConfig {
     }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf ->
+                csrf.ignoringRequestMatchers("/api/**")
+        );
         http.authenticationProvider(authenticationProvider())
                 .authorizeHttpRequests(aut ->
                         aut.requestMatchers("/", "/register", "/login",
                                             "/css/**", "/js/**",
                                             "/contact", "/show/**",
-                                            "/diagrams/**", "/api/diagrams/**"
+                                            "/diagrams/**", "/api/diagrams/**",
+                                            "/api/inventions/**", "/api/inventors/**"
                                 ).permitAll()
                                 .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
-                                .requestMatchers("/admin", "/crud", "/api/inventions/**", "/api/inventors/**").hasRole("ADMIN")
+                                .requestMatchers("/admin", "/crud").hasRole("ADMIN")
                                 .anyRequest()
                                 .authenticated()
                 ).formLogin(form ->

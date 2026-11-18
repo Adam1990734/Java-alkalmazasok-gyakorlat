@@ -4,11 +4,16 @@ import com.example.javaalkalmazasokgyakorlat.model.invention.InventionRequestDto
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionResponseDto;
 import com.example.javaalkalmazasokgyakorlat.model.invention.InventionShortDto;
 import com.example.javaalkalmazasokgyakorlat.service.InventionService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/inventions")
@@ -30,24 +35,50 @@ public class InventionRestController {
         return ResponseEntity.ok(invention);
     }
     @PostMapping
-    public ResponseEntity<InventionResponseDto> create(@RequestBody InventionRequestDto dto) {
+    public ResponseEntity<?> create(@Valid @RequestBody InventionRequestDto dto, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            Map<String, String> errors = bindingResult
+                    .getFieldErrors()
+                    .stream()
+                    .collect(Collectors.toMap(
+                            FieldError::getField,
+                            FieldError::getDefaultMessage
+                    ));
+            return ResponseEntity.badRequest().body(errors);
+        }
+
         InventionResponseDto created = inventionService.create(dto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(created);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<InventionResponseDto> update(@PathVariable Long id, @RequestBody InventionRequestDto dto) {
+    public ResponseEntity<?> update(
+            @PathVariable Long id,
+            @Valid @RequestBody InventionRequestDto dto,
+            BindingResult bindingResult
+    ) {
         if(!inventionService.existById(id))
             return ResponseEntity.notFound().build();
+        if(bindingResult.hasErrors()) {
+            Map<String, String> errors = bindingResult
+                    .getFieldErrors()
+                    .stream()
+                    .collect(Collectors.toMap(
+                            FieldError::getField,
+                            FieldError::getDefaultMessage
+                    ));
+            return ResponseEntity.badRequest().body(errors);
+        }
+
         InventionResponseDto updated = inventionService.update(id, dto);
-        return ResponseEntity.ok(updated);
+        return ResponseEntity.noContent().build();
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         if(!inventionService.existById(id))
             return ResponseEntity.notFound().build();
         inventionService.delete(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
     @GetMapping("/suggest")
     public ResponseEntity<List<InventionShortDto>> suggestByName(
