@@ -1,35 +1,53 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{Shared/mainlayout}"
       lang="en"
 >
-<body><div layout:fragment="content">
-    <div>
-        <h2>Inventor Details</h2>
-        <div>
-            <div>
-                <span>Name</span>
-                <span th:text="${inventor.name}"></span>
-            </div>
-            <div>
-                <span>Born in</span>
-                <span th:text="${inventor.bornat}"></span>
-            </div>
-            <div>
-                <span>Died in</span>
-                <span th:text="${inventor.diedat}"></span>
-            </div>
-            <div>
-                <th:block th:if="${inventor.getInventions().size() > 0}">
-                    <span>Related Inventions</span>
-                    <ul>
-                        <li th:each="invention : ${inventor.getInventions()}" th:text="${invention.name}"></li>
-                    </ul>
-                </th:block>
-                <span th:if="${inventor.getInventions().size() == 0}">There is no related invention</span>
+<body>
+<div layout:fragment="content">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="fw-bold mb-4"><i class="bi bi-person-lines-fill text-info me-2"></i>Inventor Details</h3>
+
+                        <ul class="list-group list-group-flush mb-4">
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <span class="text-muted fw-semibold">Name</span>
+                                <span class="fw-bold" th:text="${inventor.name}"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <span class="text-muted fw-semibold">Born in</span>
+                                <span th:text="${inventor.bornat}"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <span class="text-muted fw-semibold">Died in</span>
+                                <span th:text="${inventor.diedat}"></span>
+                            </li>
+                            <li class="list-group-item px-0">
+                                <span class="text-muted fw-semibold d-block mb-2">Related Inventions</span>
+                                <div th:if="${inventor.getInventions().size() > 0}" class="d-flex flex-wrap gap-1">
+                                    <span th:each="invention : ${inventor.getInventions()}"
+                                          th:text="${invention.name}"
+                                          class="badge bg-primary-subtle text-primary-emphasis border border-primary-subtle">
+                                    </span>
+                                </div>
+                                <span th:if="${inventor.getInventions().size() == 0}" class="text-muted fst-italic small">
+                                    There is no related invention
+                                </span>
+                            </li>
+                        </ul>
+
+                        <a th:href="@{/crud/inventors}" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-1"></i>Back
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <a th:href="@{/crud/inventors}">Back</a>
-</div></body>
+</div>
+</body>
 </html>

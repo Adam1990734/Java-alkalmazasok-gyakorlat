@@ -1,19 +1,41 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{Shared/mainlayout}"
       lang="en"
 >
-<body><div layout:fragment="content">
-    <form method="post" th:action="@{/crud/inventions/create}" th:object="${invention}">
-        <div>
-            <label>Name</label>
-            <div th:if="${#fields.hasErrors('name')}">
-                <span th:errors="*{name}"></span>
+<body>
+<div layout:fragment="content">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="fw-bold mb-4"><i class="bi bi-plus-circle-fill text-success me-2"></i>Create New Invention</h3>
+
+                        <form method="post" th:action="@{/crud/inventions/create}" th:object="${invention}">
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Name</label>
+                                <input th:field="*{name}" class="form-control" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+                                <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback d-block">
+                                    <span th:errors="*{name}"></span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <a th:href="@{/crud/inventions}" class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-left me-1"></i>Back
+                                </a>
+                                <button type="submit" class="btn btn-success px-4 fw-semibold">
+                                    <i class="bi bi-plus-circle me-1"></i>Add
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <input th:field="*{name}">
         </div>
-        <button type="submit">Add</button>
-    </form>
-    <a th:href="@{/crud/inventions}">Back</a>
-</div></body>
+    </div>
+</div>
+</body>
 </html>

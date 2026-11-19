@@ -1,27 +1,45 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{Shared/mainlayout}"
       lang="en"
 >
-<body><div layout:fragment="content">
-    <div>
-        <h2>Invention Details</h2>
-        <div>
-            <div>
-                <span>Name</span>
-                <span th:text="${invention.name}"></span>
-            </div>
-            <div>
-                <th:block th:if="${invention.getInventors().size() > 0}">
-                    <span>Related Inventors</span>
-                    <ul>
-                        <li th:each="inventor : ${invention.getInventors()}" th:text="${inventor.name}"></li>
-                    </ul>
-                </th:block>
-                <span th:if="${invention.getInventors().size() == 0}">There is no related inventor</span>
+<body>
+<div layout:fragment="content">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="fw-bold mb-4"><i class="bi bi-info-circle-fill text-info me-2"></i>Invention Details</h3>
+
+                        <ul class="list-group list-group-flush mb-4">
+                            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                <span class="text-muted fw-semibold">Name</span>
+                                <span class="fw-bold" th:text="${invention.name}"></span>
+                            </li>
+                            <li class="list-group-item px-0">
+                                <span class="text-muted fw-semibold d-block mb-2">Related Inventors</span>
+                                <div th:if="${invention.getInventors().size() > 0}" class="d-flex flex-wrap gap-1">
+                                    <span th:each="inventor : ${invention.getInventors()}"
+                                          th:text="${inventor.name}"
+                                          class="badge bg-secondary-subtle text-secondary-emphasis border border-secondary-subtle">
+                                    </span>
+                                </div>
+                                <span th:if="${invention.getInventors().size() == 0}" class="text-muted fst-italic small">
+                                    There is no related inventor
+                                </span>
+                            </li>
+                        </ul>
+
+                        <a th:href="@{/crud/inventions}" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left me-1"></i>Back
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <a th:href="@{/crud/inventions}">Back</a>
-</div></body>
+</div>
+</body>
 </html>

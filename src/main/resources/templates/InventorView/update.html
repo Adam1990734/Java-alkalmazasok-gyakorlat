@@ -1,34 +1,61 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{Shared/mainlayout}"
       lang="en"
 >
-<body><div layout:fragment="content">
-    <form method="post" th:action="@{/crud/inventors/update/{id}(id=${inventorId})}" th:method="PUT" th:object="${inventor}">
-        <div>
-            <label>Name</label>
-            <div th:if="${#fields.hasErrors('name')}">
-                <span th:errors="*{name}"></span>
+<body>
+<div layout:fragment="content">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="fw-bold mb-4"><i class="bi bi-pencil-square text-warning me-2"></i>Update Inventor</h3>
+
+                        <form method="post" th:action="@{/crud/inventors/update/{id}(id=${inventorId})}" th:method="PUT" th:object="${inventor}">
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Name</label>
+                                <input th:field="*{name}" class="form-control" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+                                <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback d-block">
+                                    <span th:errors="*{name}"></span>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Born In</label>
+                                <input th:field="*{bornat}" class="form-control" th:classappend="${#fields.hasErrors('bornat')} ? 'is-invalid' : ''">
+                                <div th:if="${#fields.hasErrors('bornat')}" class="invalid-feedback d-block">
+                                    <span th:errors="*{bornat}"></span>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Died In</label>
+                                <input th:field="*{diedat}" class="form-control">
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Inventions</label>
+                                <div class="p-3 bg-light rounded border">
+                                    <div th:replace="~{InventorView/selecter :: selecter}"></div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <a th:href="@{/crud/inventors}" class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-left me-1"></i>Back
+                                </a>
+                                <button type="submit" class="btn btn-warning px-4 fw-semibold">
+                                    <i class="bi bi-check-lg me-1"></i>Update
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <input th:field="*{name}">
         </div>
-        <div>
-            <label>Born In</label>
-            <div th:if="${#fields.hasErrors('bornat')}">
-                <span th:errors="*{bornat}"></span>
-            </div>
-            <input th:field="*{bornat}">
-        </div>
-        <div>
-            <label>Died In</label>
-            <input th:field="*{diedat}">
-        </div>
-        <div>
-            <label>Inventions</label> <br>
-            <div th:replace="~{InventorView/selecter :: selecter}"></div>
-        </div>
-        <button type="submit">Add</button>
-    </form>
-    <a th:href="@{/crud/inventors}">Back</a>
-</div></body>
+    </div>
+</div>
+</body>
 </html>

@@ -1,24 +1,49 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{Shared/mainlayout}"
       lang="en"
 >
-<body><div layout:fragment="content">
-    <form method="post" th:action="@{/crud/inventors/delete/{id}(id=${inventorId})}" th:method="DELETE" th:object="${inventor}">
-        <div>
-            <label>Name</label>
-            <input th:field="*{name}">
+<body>
+<div layout:fragment="content">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h3 class="fw-bold text-danger mb-2"><i class="bi bi-trash-fill me-2"></i>Delete Inventor</h3>
+                        <p class="text-muted small mb-4">Are you sure you want to delete this record?</p>
+
+                        <form method="post" th:action="@{/crud/inventors/delete/{id}(id=${inventorId})}" th:method="DELETE" th:object="${inventor}">
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Name</label>
+                                <input th:field="*{name}" class="form-control" readonly>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Born In</label>
+                                <input th:field="*{bornat}" class="form-control" readonly>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Died In</label>
+                                <input th:field="*{diedat}" class="form-control" readonly>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <a th:href="@{/crud/inventors}" class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-left me-1"></i>Back
+                                </a>
+                                <button type="submit" class="btn btn-danger px-4 fw-semibold">
+                                    <i class="bi bi-trash me-1"></i>Delete
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            <label>Born In</label>
-            <input th:field="*{bornat}">
-        </div>
-        <div>
-            <label>Died In</label>
-            <input th:field="*{diedat}">
-        </div>
-        <button type="submit">Save</button>
-    </form>
-    <a th:href="@{/crud/inventors}">Back</a>
-</div></body>
+    </div>
+</div>
+</body>
 </html>
