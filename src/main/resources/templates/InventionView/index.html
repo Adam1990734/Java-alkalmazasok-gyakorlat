@@ -1,28 +1,48 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{Shared/mainlayout}"
       lang="en"
 >
-<body><div layout:fragment="content">
-    <a th:href="@{/crud/inventions/create}">Create new invention</a>
-    <table th:fragment="inventionDisplayer">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th th:if="${hasOperations}">Operations</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="invention : ${inventions}">
-                <td th:text="${invention.name}"></td>
-                <td th:if="${hasOperations}">
-                    <a th:href="@{/crud/inventions/details/{id}(id=${invention.id})}">Details</a>
-                    <a th:href="@{/crud/inventions/update/{id}(id=${invention.id})}">Edit</a>
-                    <a th:href="@{/crud/inventions/delete/{id}(id=${invention.id})}">Remove</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <div th:replace="~{Shared/pager :: pager}"></div>
-</div></body>
+<body>
+<div layout:fragment="content">
+    <div class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold mb-0"><i class="bi bi-gear-fill text-primary me-2"></i>Manage Inventions</h2>
+            <a th:href="@{/crud/inventions/create}" class="btn btn-success">
+                <i class="bi bi-plus-circle me-1"></i>Create new invention
+            </a>
+        </div>
+
+        <div th:fragment="inventionDisplayer" class="card border-0 shadow-sm">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped align-middle mb-0">
+                        <thead class="table-dark">
+                        <tr>
+                            <th class="ps-4">Name</th>
+                            <th th:if="${hasOperations}" class="text-end pe-4">Operations</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="invention : ${inventions}">
+                            <td class="ps-4 fw-semibold" th:text="${invention.name}"></td>
+                            <td th:if="${hasOperations}" class="text-end pe-4">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a th:href="@{/crud/inventions/details/{id}(id=${invention.id})}" class="btn btn-outline-info">Details</a>
+                                    <a th:href="@{/crud/inventions/update/{id}(id=${invention.id})}" class="btn btn-outline-warning">Edit</a>
+                                    <a th:href="@{/crud/inventions/delete/{id}(id=${invention.id})}" class="btn btn-outline-danger">Remove</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div th:replace="~{Shared/pager :: pager}"></div>
+    </div>
+</div>
+</body>
 </html>
