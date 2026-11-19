@@ -1,13 +1,20 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-    <div th:fragment="pager">
-        <form th:if="${(lastpage + 1) * len < allcount}" method="get">
-            <input hidden="hidden" name="page" th:value="${lastpage + 1}">
-            <button type="submit">Next</button>
-        </form>
-        <br>
-        <form th:if="${(lastpage - 1) >= 0 && (allcount - datasize) > 0}" method="get">
-            <input hidden="hidden" name="page" th:value="${lastpage - 1}">
-            <button type="submit">Previous</button>
-        </form>
-    </div>
+<body>
+<div th:fragment="pager" class="d-flex justify-content-center align-items-center gap-3 my-4">
+    <form th:if="${(lastpage - 1) >= 0 && (allcount - datasize) > 0}" method="get" class="m-0">
+        <input hidden="hidden" name="page" th:value="${lastpage - 1}">
+        <button type="submit" class="btn btn-outline-primary">
+            <i class="bi bi-arrow-left me-1"></i> Previous
+        </button>
+    </form>
+
+    <form th:if="${(lastpage + 1) * len < allcount}" method="get" class="m-0">
+        <input hidden="hidden" name="page" th:value="${lastpage + 1}">
+        <button type="submit" class="btn btn-outline-primary">
+            Next <i class="bi bi-arrow-right ms-1"></i>
+        </button>
+    </form>
+</div>
+</body>
 </html>
