@@ -1,11 +1,22 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{Shared/mainlayout}"
       lang="en"
 >
-<body><div layout:fragment="content">
-    <div th:replace="~{InventionView/index :: inventionDisplayer}"></div>
-    <div th:replace="~{Shared/pager :: pager}"></div>
-    <a th:href="@{/}"></a>
-</div></body>
+<body>
+<div layout:fragment="content">
+    <div class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold mb-0"><i class="bi bi-gear-fill text-primary me-2"></i>Inventions</h2>
+            <a th:href="@{/}" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-house-door me-1"></i>Back to Home
+            </a>
+        </div>
+
+        <div th:replace="~{InventionView/index :: inventionDisplayer}"></div>
+        <div th:replace="~{Shared/pager :: pager}"></div>
+    </div>
+</div>
+</body>
 </html>
