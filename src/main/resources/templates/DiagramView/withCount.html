@@ -1,12 +1,28 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{Shared/mainlayout}"
       lang="en"
-><body><div layout:fragment="content">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <div>
-        <h2>Bar Diagram</h2>
-        <canvas id="barDiagram"></canvas>
+>
+<body>
+<div layout:fragment="content">
+    <div class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold mb-0"><i class="bi bi-bar-chart-fill text-primary me-2"></i>Bar Diagram (With Counts)</h2>
+            <a th:href="@{/diagrams/timeline}" class="btn btn-outline-success btn-sm">
+                <i class="bi bi-graph-up me-1"></i>Switch to Timeline Diagram
+            </a>
+        </div>
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                <canvas id="barDiagram"></canvas>
+            </div>
+        </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/js/withCountDiagram.js"></script>
-</div></body></html>
+</div>
+</body>
+</html>
