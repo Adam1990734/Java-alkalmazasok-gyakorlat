@@ -51,20 +51,4 @@ public class DatabaseReadController {
         model.addAttribute("hasOperations", false);
         return "DatabaseReadView/invention";
     }
-    @GetMapping("/all")
-    public String viewAll(
-            @RequestParam(name = "page", defaultValue = "0", required = false) int page,
-            @RequestParam(name = "len", defaultValue = "20", required = false) int len,
-            Model model
-    ) {
-        var all = inventorService.findAll(page, len);
-        model.addAttribute("all", all);
-
-        model.addAttribute("len", len);
-        model.addAttribute("lastpage", page);
-        model.addAttribute("allcount", inventorService.countAll());
-        model.addAttribute("datasize", all.size());
-        model.addAttribute("hasOperations", false);
-        return "DatabaseReadView/all";
-    }
 }
