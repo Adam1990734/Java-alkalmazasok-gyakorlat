@@ -1,9 +1,6 @@
 package com.example.javaalkalmazasokgyakorlat.model.inventor;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.util.Set;
 
@@ -13,6 +10,8 @@ public class InventorRequestDto {
     private String name;
 
     @NotNull(message = "The born year is required!")
+    @Min(value = 1, message = "The 1 is the minimum year!")
+    @Max(value = 2026, message = "The 2026 is the maximum year!")
     private Integer bornat;
 
     private Integer diedat;

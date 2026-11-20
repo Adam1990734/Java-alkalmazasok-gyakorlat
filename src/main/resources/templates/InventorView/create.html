@@ -24,7 +24,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Born In</label>
-                                <input th:field="*{bornat}" class="form-control" th:classappend="${#fields.hasErrors('bornat')} ? 'is-invalid' : ''">
+                                <input type="number" th:field="*{bornat}" class="form-control" th:classappend="${#fields.hasErrors('bornat')} ? 'is-invalid' : ''">
                                 <div th:if="${#fields.hasErrors('bornat')}" class="invalid-feedback d-block">
                                     <span th:errors="*{bornat}"></span>
                                 </div>
@@ -32,7 +32,7 @@
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Died In</label>
-                                <input th:field="*{diedat}" class="form-control">
+                                <input type="number" th:field="*{diedat}" class="form-control">
                             </div>
 
                             <div class="mb-4">

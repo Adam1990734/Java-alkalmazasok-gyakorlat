@@ -47,6 +47,14 @@ public class InventionServiceImp implements InventionService {
     }
     @Override
     public void delete(Long id) {
+        var invention = repository.findById(id)
+                        .orElseThrow();
+
+        for(var inventor : invention.getInventors())
+            inventor.getInventions().remove(invention);
+
+        invention.getInventors().clear();
+
         repository.deleteById(id);
     }
 

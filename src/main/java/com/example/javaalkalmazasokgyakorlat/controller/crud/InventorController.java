@@ -50,7 +50,12 @@ public class InventorController {
         return "InventorView/create";
     }
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute("inventor") InventorRequestDto dto, BindingResult bindingResult) {
+    public String create(
+            @Valid @ModelAttribute("inventor") InventorRequestDto dto,
+            BindingResult bindingResult,
+            Model model
+    ) {
+        model.addAttribute("isUpdate", false);
         if(bindingResult.hasErrors())
             return "InventorView/create";
         InventorResponseDto created = inventorService.create(dto);
@@ -70,8 +75,10 @@ public class InventorController {
     public String update(
             @PathVariable Long id,
             @Valid @ModelAttribute("inventor") InventorRequestDto dto,
-            BindingResult bindingResult
+            BindingResult bindingResult,
+            Model model
     ) {
+        model.addAttribute("isUpdate", true);
         if(bindingResult.hasErrors())
             return "InventorView/update";
         InventorResponseDto updated = inventorService.update(id, dto);
